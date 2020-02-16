@@ -1,6 +1,7 @@
 # SmartDisplayPi
 
 ## Coming really soon!!!!!!
+## Images!!!
 ![Image of Home Screen](Images/home.png)
 ![Image of Home Screen + Shade](Images/homewithshade.png)
 ![Image of Ambient Mode](Images/ambientmode.png)
