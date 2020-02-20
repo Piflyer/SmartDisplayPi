@@ -1,5 +1,6 @@
 # SmartDisplayPi
 ## Coming Soon!
+## Images are coming soon!
 An awesome smart display powered by Google Assistant and Raspberry Pi.
 
 ## Features
