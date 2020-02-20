@@ -4,7 +4,7 @@ An awesome smart display powered by Google Assistant and Raspberry Pi.
 
 ## Features
 
-* Google Assistant
+* Google Assistant 
 * Built-in home hub powered by Home Assistant
 * Airplay compatible speaker
 * Bluetooth speaker
