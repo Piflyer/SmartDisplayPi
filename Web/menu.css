@@ -1,0 +1,27 @@
+#mainmenu
+{
+position: absolute;
+width: 800px;
+height: 60px;
+left: 0px;
+top: 0px;
+background: #4D4C4C;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+#arrow
+{
+position: absolute;
+width: 60px;
+height: 60px;
+left: 0px;
+top: 0px;
+}
+#page
+{
+position: absolute;
+width: 800px;
+height: 420px;
+left: 0px;
+top: 60px;
+background: #C4C4C4;
+}

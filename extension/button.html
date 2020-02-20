@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Button</title>
+    <link rel="stylesheet" href="flickity.css" media="screen">
+    <script src="manifest.js"></script>
+  </head>
+  <body>
+    <div id="shortcuts">
+    <div id="name">Howdy Tim!</div>
+    <div id="settings">Settings</div>
+    <a href="/home/pi/ui/index2.html"><div id="ambient">Home</div></a>
+    <div id="apps">Apps:</div>
+    <a href="http://localhost"><img id="homeassistant" src="halogo.png"></a>
+    <a href="https://www.youtube.com/tv"><img id="youtube" src="youtube.png"></a>
+    <a href="/home/pi/ui/ambient.html"><img id="clock" src="gclock.png"></a>
+    <a href="https://www.tasty.co"><img id="tasty" src="tastylogo.jpeg" ></a>
+    <div id="gphotosbg"></div>
+    <a href="http://127.0.0.1:8080/"><img id="gphotosimg" src="googlephotos.png" ></a>
+    </div>
+<div id="homebutton"></div>
+<button id="homesquare" onclick="myFunction()">
+<script>
+  function myFunction() {
+  var x = document.getElementById("shortcuts");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+  }
+</script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href='style.css' rel='stylesheet' />
+    <title>Settings</title>
+  </head>
+  <body>
+    <a id="bar2" href="http://localhost:8123/config/dashboard"></a>
+        <a href="http://localhost:8123/config/dashboard"><img id="halogoset" src="halogo.png"></a>
+        <div id="hatext">Home Assistant</div>
+        <div id="hadescr">Control and manage Home Assistant</div>
+    <a id="bar3" href="http://localhost:8080/index.php?page=wpa_conf"></a>
+        <a href="http://localhost:8080/index.php?page=wpa_conf"><img id="raspaplogoset" src="raspAP-logo.png"></a>
+        <div id="raspaptext">RasAP</div>
+        <div id="raspapdescr">Control and manage network settings via RaspAP</div>
+    <a id="bar4" href="chrome://settings"></a>
+        <a href="chrome://settings"><img id="chromiumlogoset" src="Chromium_Material_Icon.png"></a>
+        <div id="chrometext">Chromium</div>
+        <div id="chromedescr">Control and manage Chromium</div>
+    <a id="bar5" href="Setup/wizardhome.html"></a>
+        <a id="setupcircle" href="Setup/wizardhome.html"></a>
+        <div id="setup">Setup Wizard</div>
+        <div id="setupdesc">Launch Setup Wizard</div>
+    <div id="bar1"></div>
+        <div id="title">Settings</div>
+        <div id="shortcuts">
+        <div id="name">Howdy Tim!</div>
+        <a href="settings.html"><div id="settings">Settings</div></a>
+        <a href="index2.html"><div id="ambient">Home</div></a>
+        <div id="apps">Apps:</div>
+        <a href="http://localhost:8123"><img id="homeassistant" src="halogo.png"></a>
+        <a href="https://www.youtube.com/tv"><img id="youtube" src="youtube.png"></a>
+        <a href="ambient.html"><img id="clock" src="gclock.png"></a>
+        <a href="https://www.tasty.co"><img id="tasty" src="tastylogo.jpeg" ></a>
+        <div id="gphotosbg"></div>
+        <a href="http://127.0.0.1:8080/"><img id="gphotosimg" src="googlephotos.png" ></a>
+        </div>
+  <div id="homebutton"></div>
+  <button id="homesquare" onclick="myFunction()">
+  <script>
+  function myFunction() {
+    var x = document.getElementById("shortcuts");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+  </script>
+  </body>
+</html>

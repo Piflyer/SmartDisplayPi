@@ -1,0 +1,134 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  src:
+  url('Roboto/Roboto-Regular.ttf')
+}
+body {
+  background: #FAFAFA;
+}
+#bar {
+  position: absolute;
+  width: 800px;
+  height: 79px;
+  left: 0px;
+  top: 0px;
+  background: #FAFAFA;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+#title {
+  position: absolute;
+  width: 179px;
+  height: 43px;
+  left: 25px;
+  top: 18px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  color: #000000;
+}
+#center {
+  position: absolute;
+  width: 646px;
+  height: 209px;
+  left: 77px;
+  top: 114px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+}
+#button {
+  position: absolute;
+  width: 410px;
+  height: 61px;
+  left: 195px;
+  top: 373px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+}
+#nextbutton {
+  position: absolute;
+  width: 155px;
+  height: 36px;
+  left: 322px;
+  top: 386px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+}
+#continue {
+  position: absolute;
+  width: 103px;
+  height: 36px;
+  left: 348px;
+  top: 386px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+}
+iframe {
+  position: absolute;
+  width: 800px;
+  height: 401px;
+  left: 0px;
+  top: 79px;
+}
+#donebutton {
+  position: absolute;
+  width: 276px;
+  height: 61px;
+  left: 511px;
+  top: 9px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 22px;
+}
+#done {
+  position: absolute;
+  width: 65px;
+  height: 36px;
+  left: 616px;
+  top: 22px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+}
+#done2{
+  position: absolute;
+  width: 58px;
+  height: 36px;
+  left: 371px;
+  top: 386px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+}

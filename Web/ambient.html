@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<link href='style.css' rel='stylesheet' />
+<script>
+function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML =
+  h + ":" + m;
+  var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+var calendar = new FullCalendar.Calendar(calendarEl, {
+  plugins: [ 'list' ],
+  defaultView: 'listWeek'
+});
+function myFunction() {
+var x = document.getElementById("shortcuts");
+if (x.style.display === "none") {
+  x.style.display = "block";
+} else {
+  x.style.display = "none";
+}
+}
+</script>
+<style media="screen">
+  .div {
+position: absolute;
+width: 200px;
+height: 81px;
+left: 600px;
+top: 399px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 65px;
+line-height: 76px;
+
+color: #808080;
+
+  }
+  body {
+    background-color: #000000
+}
+</style>
+</head>
+
+<body onload="startTime()">
+
+<div class="div" id="txt"></div>
+<div id="shortcuts">
+<div id="name">Howdy Tim!</div>
+<a href="settings.html"><div id="settings">Settings</div></a>
+<a href="index2.html"><div id="ambient">Home</div></a>
+<div id="apps">Apps:</div>
+<a href="http://localhost:8123"><img id="homeassistant" src="halogo.png"></a>
+<a href="https://www.youtube.com/tv"><img id="youtube" src="youtube.png"></a>
+<a href="ambient.html"><img id="clock" src="gclock.png"></a>
+<a href="https://www.tasty.co"><img id="tasty" src="tastylogo.jpeg" ></a>
+<div id="gphotosbg"></div>
+<a href="http://127.0.0.1:8080/"><img id="gphotosimg" src="googlephotos.png" ></a>
+</div>
+<div id="homebutton"></div>
+<button id="homesquare" onclick="myFunction()">
+</body>
+</html>
