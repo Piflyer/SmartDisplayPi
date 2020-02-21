@@ -1,0 +1,18 @@
+[Unit]
+Description=Google Assistant-Voice
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Environment=VIRTUAL_ENV=/home/__USER__/env
+Environment=PATH=/home/__USER__/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/home/pi/env/bin/python -u /home/pi/googlesamples-assistant-hotword --project-id 'projectid' --device-model-id 'modelid' [--nickname SmartDisplayPi]
+
+WorkingDirectory=/home/__USER__/
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=__USER__
+
+[Install]
+WantedBy=multi-user.target

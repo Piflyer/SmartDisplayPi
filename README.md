@@ -1,11 +1,10 @@
 # SmartDisplayPi
-## Coming Soon!
-## Images are coming soon!
 An awesome smart display powered by Google Assistant and Raspberry Pi.
-
+## NOTE
+This is still in development.
 ## Features
 
-* Google Assistant 
+* Google Assistant
 * Built-in home hub powered by Home Assistant
 * Airplay compatible speaker
 * Bluetooth speaker
@@ -32,7 +31,7 @@ An awesome smart display powered by Google Assistant and Raspberry Pi.
 
 
 ## Installation guide:
-It is *recommended* that you use our pre-built images in our **releases** tab. Our images are based on Raspbian Buster. We will However, if you are up for the challenge, we will be releasing an installer soon.
+It is *recommended* that you use our pre-built images in our **releases** tab. Our images are based on Raspbian Buster Lite. We will posting an installer soon if you are up for the challenge. Head over to our Wiki for more information.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Any help or feedback will greatly be appreciated.

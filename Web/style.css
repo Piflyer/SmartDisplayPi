@@ -1,3 +1,10 @@
+html {
+  overflow:   scroll;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
 body {
   background: #FAFAFA;
   overflow: scroll;
@@ -396,30 +403,4 @@ body {
         top: 308px;
         border-radius: 100%;
         background: #1EAAF1;
-      }
-      #setup {
-        position: absolute;
-        width: 205px;
-        height: 33px;
-        left: 109px;
-        top: 411px;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 25px;
-        line-height: 29px;
-        color: #373737;
-      }
-      #setupdesc {
-        position: absolute;
-        width: 213px;
-        height: 18px;
-        left: 109px;
-        top: 440px;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 18px;
-        color: #727272;
       }
