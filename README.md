@@ -31,7 +31,7 @@ This is still in development.
 
 
 ## Installation guide:
-It is *recommended* that you use our pre-built images in our **releases** tab. Our images are based on Raspbian Buster Lite. We will posting an installer soon if you are up for the challenge. Head over to our Wiki for more information.
+It is *recommended* that you use our pre-built images in our **releases** tab. Our images are based on Raspbian Buster Lite. We will posting an installer soon if you are up for the challenge. Head over to our Wiki for more information and known bugs.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Any help or feedback will greatly be appreciated.
@@ -49,6 +49,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 * [Blue-ALSA](https://github.com/Arkq/bluez-alsa)
 * [rpi-audio-receiver-master](https://github.com/nicokaiser/rpi-audio-receiver)
 * [ffmpeg camera](https://einar.slaskete.net/2018/08/16/using-a-raspberry-pi-as-a-surveillance-camera-in-home-assistant/)
+* [Flickity.js](https://flickity.metafizzy.co/)
 
 ## Further Development
 In the near future, we would love to see SmartDisplayPi to all be controlled by without using command line. If anyone would like to help us push forward towards that goal, or even help us with the widget store, please send us a pull request. Thanks!
