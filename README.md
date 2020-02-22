@@ -25,7 +25,7 @@ This is still in development.
 
 * Raspberry Pi 3B or newer (At *least* 1GB of memory)
 * Raspberry Pi Foundation 7" Display
-* *Minimum* 16GB SD card
+* *Minimum* 8GB SD card
 * AIY Kit v1
 * Raspberry Pi Camera **Optional**
 
