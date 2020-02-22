@@ -1,0 +1,13 @@
+[Unit]
+Description=hello_env.js - making your environment variables rad
+Documentation=https://example.com
+After=network.target
+
+[Service]
+Environment=NODE_PORT=8080
+User=pi
+ExecStart=/usr/bin/node /home/pi/SmartDisplayPi/google-photos/REST/PhotoFrame/app.js
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
