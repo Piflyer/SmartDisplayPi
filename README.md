@@ -1,7 +1,7 @@
 # SmartDisplayPi
 An awesome smart display powered by Google Assistant and Raspberry Pi.
 ## NOTE
-This is still in development. Google Assistant is currently brolen due to the libraries. A fix is on the way.
+This is still in development. Google Assistant is currently broken due to the libraries. A fix is on the way.
 ## Features
 
 * Google Assistant
