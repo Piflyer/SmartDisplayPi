@@ -31,7 +31,7 @@ This is still in development. Google Assistant is currently broken due to the li
 
 
 ## Installation guide:
-It is *recommended* that you use our pre-built images in our **releases** tab. Our images are based on Raspbian Buster Lite. We will posting an installer soon if you are up for the challenge. Head over to our Wiki for more information and known bugs.
+It is *recommended* that you use our pre-built images in our [**releases**](https://github.com/piflyer/SmartDisplayPi/releases) tab. Our images are based on Raspbian Buster Lite. We will posting an installer soon if you are up for the challenge. Head over to our Wiki for more information and known bugs.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Any help or feedback will greatly be appreciated.
