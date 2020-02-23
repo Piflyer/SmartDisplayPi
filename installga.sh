@@ -19,8 +19,8 @@ google-oauthlib-tool --scope https://www.googleapis.com/auth/assistant-sdk-proto
       --scope https://www.googleapis.com/auth/gcm \
       --save --headless --client-secrets $configfile
 echo "We are almost done, hang on tight!"
-sed -i 's/modelid/'$modelid'/g' /home/pi/SmartDisplayPi/systemd/assistant.service
-sed -i 's/projectid/'$projid'/g' /home/pi/SmartDisplayPi/systemd/assistant.service
+sed -i 's/modelid/'$modelid'/g' /home/pi/SmartDisplayPi/assistant.service
+sed -i 's/projectid/'$projid'/g' /home/pi/SmartDisplayPi/assistant.service
 sudo mv /home/pi/SmartDisplayPi/assistant.service /lib/systemd/system/assistant.service
 sudo systemctl enable assistant.service
 sudo systemctl start assistant.service
