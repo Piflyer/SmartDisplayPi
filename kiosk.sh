@@ -1,5 +1,9 @@
 xset s off
+echo "[DEV]: SCREENSAVER: OFF"
 xset -dpms
+echo "[DEV]: ENERGY STAR FEATURES: OFF"
 xset s noblank
-sed -i 's/"exited_cleanly": false/"exited_cleanly": true/' ~/.config/chromium-browser Default/Preferences
-chromium-browser --noerrdialogs --kiosk file:///home/pi/SmartDisplayPi/Web/index2.html --window-size=800,480 --window-position=0,0
+echo "[DEV]: BLANKING: OFF"
+# sed -i 's/"exited_cleanly": false/"exited_cleanly": true/' ~/.config/chromium-browser Default/Preferences
+echo "[DEV]: CHROME: STARTING"
+chromium-browser file:///home/pi/SmartDisplayPi/Web/index.html --window-position=0,0
