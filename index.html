@@ -15,9 +15,7 @@ that we posted on Github. Enjoy using SmartDisplayPi!
   <script src="offline.js"></script>
   <link rel="stylesheet" type="text/css" href="offline-theme.css">
   <link rel="stylesheet" href="offline-language-english.min.css" />
-  <script src="flickity.js"></script>
   <script src="hammer.js"></script>
-  <link rel="stylesheet" href="flickity.css" media="screen">
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href='fullcalendar/packages/core/main.css' rel='stylesheet' />
   <link href='style.css' rel='stylesheet' />
@@ -32,42 +30,29 @@ that we posted on Github. Enjoy using SmartDisplayPi!
       pointer-events: all;
     }
   </style>
-  <iframe id="back" src="https://clients3.google.com/cast/chromecast/home/v/c9541b08"></iframe>
-  <div class="carousel js-flickity"
-    data-flickity='{ "prevNextButtons": false,"rightToLeft": true, "pageDots": false } '>
-    <div class="carousel-cell">
-      <div id="menubarspacer">
-      </div>
+  <!-- <iframe id="back" src="https://clients3.google.com/cast/chromecast/home/v/c9541b08"></iframe> -->
+  <div class="grid">
+    <div class="widget">
+      <h3>Traffic</h3>
+      <iframe src="CHANGE_URL.html" frameborder="0"></iframe>
     </div>
-    <div class="carousel-cell">
-      <div id="menubar">
-        <div id="h3">Traffic</div>
-        <iframe id="iframe" src="CHANGE_URL.html" frameborder="0"></iframe>
-      </div>
+    <div class="widget">
+      <h3>Weather</h3>
+      <iframe src="CHANGE_URL.html" frameborder="0"></iframe>
     </div>
-    <div class="carousel-cell">
-      <div id="menubar">
-        <div id="h3">Weather</div>
-        <iframe id="iframe" src="CHANGE_URL.html" frameborder="0"></iframe>
-      </div>
-    </div>
-    <div class="carousel-cell">
-      <div id="menubar">
-        <div id="h3">Calendar</div>
-        <iframe id="iframe" src="CHANGE_URL.html" style="border-width:0" width="275" height="357" frameborder="0"
-          scrolling="no"></iframe>
-      </div>
+    <div class="widget">
+      <h3>Calendar</h3>
+      <iframe src="CHANGE_URL.html" style="border-width:0" width="275" height="357" frameborder="0"
+        scrolling="no"></iframe>
     </div>
   </div>
   <div class="animate__animated animate__slideInUp" id="shortcuts">
-    <div id="apps2">
-      <a href="http://localhost:8123"><img src="halogo.png"></a>
-      <a href="https://www.youtube.com/tv"><img src="youtube.png"></a>
-      <a href="ambient.html"><img src="gclock.png"></a>
-      <a href="https://www.tasty.co"><img src="tastylogo.jpeg"></a>
-      <a href="http://127.0.0.1:8080/"><img src="googlephotos.png"></a>
-      <a href="settings.html"><img src="settings.png"></a>
-    </div>
+    <a href="http://localhost:8123" id="first-image"><img src="media/halogo.png"></a>
+    <a href="https://www.youtube.com/tv"><img src="media/youtube.png"></a>
+    <a href="ambient.html"><img src="media/gclock.png"></a>
+    <a href="https://www.tasty.co"><img src="media/tastylogo.jpeg"></a>
+    <a href="http://127.0.0.1:8080/"><img src="media/googlephotos.png"></a>
+    <a href="settings.html"><img src="media/settings.png"></a>
   </div>
   <div id="homebutton" onclick="closeopen()">
     <div id="homesquare"></div>

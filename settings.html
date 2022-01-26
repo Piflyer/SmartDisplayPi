@@ -6,7 +6,13 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href='style.css' rel='stylesheet' />
   <title>Settings</title>
-
+  <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
+  <script type="text/javascript">
+    hotkeys('ctrl+shift+d', function (event, handler) {
+      event.preventDefault();
+      window.location.href = "devmode.html";
+    });
+  </script>
 </head>
 
 <body>
@@ -22,8 +28,9 @@
   <a id="setupcircle" href="Setup/wizardhome.html"></a>
   <div id="chrometext">Setup Wizard</div>
   <div id="chromedescr">Launch Setup Wizard</div>
+
   <div id="bar1"></div>
-  <div id="title">Settings</div>
+  <div id="title">Settings <a id="exitdev">Exit Developer Mode</a></div>
   <div id="shortcuts">
     <div id="name">Howdy Tim!</div>
     <a href="settings.html">
@@ -39,10 +46,44 @@
     <a href="https://www.tasty.co"><img id="tasty" src="tastylogo.jpeg"></a>
     <div id="gphotosbg"></div>
     <a href="http://127.0.0.1:8080/"><img id="gphotosimg" src="googlephotos.png"></a>
+
   </div>
   <div id="homebutton">
     <div id="homesquare" onclick="closeopen()"></div>
   </div>
+  <script>
+    var fs = require("fs");
+    read_file = function (path) {
+      return fs.readFileSync(path, 'utf8');
+    }
+
+    write_file = function (path, output) {
+      fs.writeFileSync(path, output);
+    }
+    settings = JSON.parse(read_file("/home/pi/SmartDisplayPi/settings.json"));
+    if (settings.devmode == true) {
+      document.getElementById("exitdev").style.display = "block";
+    }
+    document.getElementById("exitdev").onclick = function () {
+      q = confirm("Are you sure you want to exit developer mode?");
+      if (q) {
+        settings.devmode = false;
+        write_file("/home/pi/SmartDisplayPi/settings.json", JSON.stringify(settings));
+        console.log("Rebooting")
+        var exec = require('child_process').exec;
+
+        // Create shutdown function
+        function shutdown(callback) {
+          exec('shutdown -r now', function (error, stdout, stderr) { callback(stdout); });
+        }
+
+        // Reboot computer
+        shutdown(function (output) {
+          console.log(output);
+        });
+      }
+    }
+  </script>
   <script src="universal.js"></script>
 
 </body>
