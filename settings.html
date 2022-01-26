@@ -13,6 +13,8 @@
       window.location.href = "devmode.html";
     });
   </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
 </head>
 
 <body>
@@ -30,26 +32,16 @@
   <div id="chromedescr">Launch Setup Wizard</div>
 
   <div id="bar1"></div>
-  <div id="title">Settings <a id="exitdev">Exit Developer Mode</a></div>
-  <div id="shortcuts">
-    <div id="name">Howdy Tim!</div>
-    <a href="settings.html">
-      <div id="settings">Settings</div>
-    </a>
-    <a href="index.html">
-      <div id="ambient">Home</div>
-    </a>
-    <div id="apps">Apps:</div>
-    <a href="http://localhost:8123"><img id="homeassistant" src="halogo.png"></a>
-    <a href="https://www.youtube.com/tv"><img id="youtube" src="youtube.png"></a>
-    <a href="ambient.html"><img id="clock" src="gclock.png"></a>
-    <a href="https://www.tasty.co"><img id="tasty" src="tastylogo.jpeg"></a>
-    <div id="gphotosbg"></div>
-    <a href="http://127.0.0.1:8080/"><img id="gphotosimg" src="googlephotos.png"></a>
-
+  <div class="animate__animated animate__slideInUp" id="shortcuts">
+    <a href="http://localhost:8123" id="first-image"><img src="media/halogo.png"></a>
+    <a href="https://www.youtube.com/tv"><img src="media/youtube.png"></a>
+    <a href="ambient.html"><img src="media/gclock.png"></a>
+    <a href="https://www.tasty.co"><img src="media/tastylogo.jpeg"></a>
+    <a href="http://127.0.0.1:8080/"><img src="media/googlephotos.png"></a>
+    <a href="settings.html"><img src="media/settings.png"></a>
   </div>
-  <div id="homebutton">
-    <div id="homesquare" onclick="closeopen()"></div>
+  <div id="homebutton" onclick="closeopen()">
+    <div id="homesquare"></div>
   </div>
   <script>
     var fs = require("fs");

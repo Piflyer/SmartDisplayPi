@@ -17,6 +17,15 @@ function closeopen() {
         });
     }
 }
+function resize() {
+    document.getElementById("first-image").style.marginLeft = (document.getElementById("first-image").offsetWidth + (0.015 * document.body.offsetWidth)) + "px";
+    document.getElementById("homebutton").style.height = document.getElementById("first-image").offsetWidth + "px";
+    document.getElementById("homebutton").style.width = document.getElementById("first-image").offsetWidth + "px";
+}
+resize();
+// DEVELOPMENT PURPOSES ONLY!!!
+window.addEventListener('resize', resize);
+// Back to your regularly scheduled programming.
 const Packery = require('packery');
 const Draggabilly = require('draggabilly');
 var pckry = new Packery('.grid', {
@@ -28,4 +37,3 @@ pckry.getItemElements().forEach(function (itemElem) {
     var draggie = new Draggabilly(itemElem);
     pckry.bindDraggabillyEvents(draggie);
 });
-document.getElementById("first-image").style.marginLeft = document.getElementById("first-image").offsetWidth + "px";
