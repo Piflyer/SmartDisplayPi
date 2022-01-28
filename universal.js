@@ -26,14 +26,3 @@ resize();
 // DEVELOPMENT PURPOSES ONLY!!!
 window.addEventListener('resize', resize);
 // Back to your regularly scheduled programming.
-const Packery = require('packery');
-const Draggabilly = require('draggabilly');
-var pckry = new Packery('.grid', {
-    itemSelector: '.widget',
-    columnWidth: 10,
-    gutter: 10,
-});
-pckry.getItemElements().forEach(function (itemElem) {
-    var draggie = new Draggabilly(itemElem);
-    pckry.bindDraggabillyEvents(draggie);
-});

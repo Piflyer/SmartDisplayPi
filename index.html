@@ -21,6 +21,7 @@ that we posted on Github. Enjoy using SmartDisplayPi!
   <link href='style.css' rel='stylesheet' />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <meta charset="utf-8">
+  <script src="index.js"></script>
   <title>Smart Display</title>
 </head>
 
@@ -30,7 +31,7 @@ that we posted on Github. Enjoy using SmartDisplayPi!
       pointer-events: all;
     }
   </style>
-  <!-- <iframe id="back" src="https://clients3.google.com/cast/chromecast/home/v/c9541b08"></iframe> -->
+  <div id="background" alt="background"></div>
   <div class="grid">
     <div class="widget">
       <h3>Traffic</h3>
@@ -50,7 +51,7 @@ that we posted on Github. Enjoy using SmartDisplayPi!
     <a href="http://localhost:8123" id="first-image"><img src="media/halogo.png"></a>
     <a href="https://www.youtube.com/tv"><img src="media/youtube.png"></a>
     <a href="ambient.html"><img src="media/gclock.png"></a>
-    <a href="https://www.tasty.co"><img src="media/tastylogo.jpeg"></a>
+    <a href="webview.html?url=https://www.tasty.co"><img src="media/tastylogo.jpeg"></a>
     <a href="http://127.0.0.1:8080/"><img src="media/googlephotos.png"></a>
     <a href="settings.html"><img src="media/settings.png"></a>
   </div>

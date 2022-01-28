@@ -4,11 +4,31 @@
   /* make scrollbar transparent */
 }
 
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: background-image 3s;
+}
+
+
 #exitdev {
   display: none;
   color: auto;
   text-decoration: underline;
   cursor: auto;
+}
+
+webview {
+  width: 100vw;
+  height: 100vh;
+  border: none;
 }
 
 #back {
@@ -31,31 +51,24 @@
 }
 
 .widget {
-  width: 291px;
+  width: 30%;
   height: 437px;
-  left: 15px;
-  top: 21px;
   background: #EFEFEF;
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
   border-radius: 35px;
-  margin-right: 20px;
+  margin-right: 3.3333%;
+  margin-bottom: 3.3333%;
 }
 
 
 .widget h3 {
-  font-size: 20px;
-  font-weight: bold;
-  color: #000;
-  margin-top: 20px;
-  margin-left: 20px;
+  margin-top: 10%;
+  margin-left: 25%;
 }
 
 .widget iframe {
-  position: absolute;
-  width: 275px;
-  height: 357px;
-  left: 8px;
-  top: 74px;
+  width: 95%;
+  height: 80%;
   overflow: hidden;
   overflow-x: hidden;
   scrollbar-width: none;

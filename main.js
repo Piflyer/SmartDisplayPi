@@ -6,6 +6,7 @@ const createWindow = () => {
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
+            webviewTag: true
         }
     })
 
@@ -13,6 +14,8 @@ const createWindow = () => {
     if (JSON.parse(require('fs').readFileSync('./settings.json', 'utf8'))['devmode'] == false) {
         win.kiosk = true
     }
+    const contents = win.webContents
+    console.log(contents)
 }
 app.whenReady().then(() => {
     createWindow()

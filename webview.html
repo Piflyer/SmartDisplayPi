@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+</head>
+
+<body style="margin: 0;">
+    <webview
+        useragent="Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36">
+    </webview>
+    <div class="animate__animated animate__slideInUp" id="shortcuts">
+        <a href="http://localhost:8123" id="first-image"><img src="media/halogo.png"></a>
+        <a href="https://www.youtube.com/tv"><img src="media/youtube.png"></a>
+        <a href="ambient.html"><img src="media/gclock.png"></a>
+        <a href="webview.html?url=https://www.tasty.co"><img src="media/tastylogo.jpeg"></a>
+        <a href="http://127.0.0.1:8080/"><img src="media/googlephotos.png"></a>
+        <a href="settings.html"><img src="media/settings.png"></a>
+    </div>
+    <div id="homebutton" onclick="closeopen()">
+        <div id="homesquare"></div>
+    </div>
+    <script src="universal.js"></script>
+    <script>
+        const webview = document.querySelector('webview');
+        var url = new URLSearchParams(window.location.search).get('url');
+        webview.src = url;
+
+    </script>
+</body>
+
+</html>
