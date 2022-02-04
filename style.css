@@ -4,6 +4,10 @@
   /* make scrollbar transparent */
 }
 
+* {
+  font-family: Roboto;
+}
+
 #background {
   position: fixed;
   top: 0;
@@ -20,9 +24,6 @@
 
 #exitdev {
   display: none;
-  color: auto;
-  text-decoration: underline;
-  cursor: auto;
 }
 
 webview {
@@ -50,14 +51,19 @@ webview {
   border: none
 }
 
+.grid {
+  height: 75%;
+}
+
 .widget {
-  width: 30%;
-  height: 437px;
+  width: 20%;
+  height: 50%;
   background: #EFEFEF;
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
   border-radius: 35px;
   margin-right: 3.3333%;
   margin-bottom: 3.3333%;
+  margin-top: 2%;
 }
 
 
@@ -88,7 +94,6 @@ webview {
   height: 50px;
   left: 15px;
   top: 11px;
-  font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 34px;
@@ -102,7 +107,6 @@ webview {
   height: 40px;
   left: 269px;
   top: 15px;
-  font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 30px;
@@ -116,7 +120,6 @@ webview {
   height: 40px;
   left: 459px;
   top: 16px;
-  font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 30px;
@@ -130,7 +133,6 @@ webview {
   height: 40px;
   left: 15px;
   top: 74px;
-  font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 30px;
@@ -259,7 +261,6 @@ i {
   height: 40px;
   left: 33px;
   top: 18px;
-  font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 43px;
@@ -267,49 +268,34 @@ i {
   color: #373737;
 }
 
-#bar1 {
-  position: absolute;
-  width: 800px;
-  height: 79px;
-  left: 0px;
-  top: 0px;
-  background: #FAFAFA;
+.setting-menu {
+  width: 100%;
+  height: 110px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-
-
-#bar2 {
-  position: absolute;
-  width: 734px;
-  height: 80px;
-  left: 33px;
-  top: 103px;
-  background: #FFFFFF;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-  border-radius: 2px;
+.setting-menu img {
+  float: left;
+  height: 80%;
+  border-radius: 10px;
+  margin: 10px;
 }
 
-#bar3 {
-  position: absolute;
-  width: 734px;
-  height: 80px;
-  left: 33px;
-  top: 200px;
-  background: #FFFFFF;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-  border-radius: 2px;
+.setting-menu h1 {
+  margin-top: -5px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  color: #373737;
 }
 
-#bar4 {
-  position: absolute;
-  width: 734px;
-  height: 80px;
-  left: 33px;
-  top: 297px;
-  background: #FFFFFF;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-  border-radius: 2px;
+.setting-menu p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  color: #727272;
 }
 
 #halogoset {
@@ -343,7 +329,6 @@ i {
   height: 33px;
   left: 109px;
   top: 114px;
-  font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 25px;
@@ -357,7 +342,6 @@ i {
   height: 18px;
   left: 109px;
   top: 147px;
-  font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
@@ -371,7 +355,7 @@ i {
   height: 33px;
   left: 109px;
   top: 212px;
-  font-family: Roboto;
+
   font-style: normal;
   font-weight: 500;
   font-size: 25px;
@@ -385,7 +369,7 @@ i {
   height: 18px;
   left: 109px;
   top: 245px;
-  font-family: Roboto;
+
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
@@ -399,7 +383,7 @@ i {
   height: 33px;
   left: 109px;
   top: 308px;
-  font-family: Roboto;
+
   font-style: normal;
   font-weight: 500;
   font-size: 25px;
@@ -413,7 +397,7 @@ i {
   height: 18px;
   left: 109px;
   top: 341px;
-  font-family: Roboto;
+
   font-style: normal;
   font-weight: 500;
   font-size: 15px;

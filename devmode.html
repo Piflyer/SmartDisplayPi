@@ -50,30 +50,12 @@
                     jax.print('0');
                 }, 5);
                 setTimeout(function () {
-                    var fs = require("fs");
-                    read_file = function (path) {
-                        return fs.readFileSync(path, 'utf8');
-                    }
-
-                    write_file = function (path, output) {
-                        fs.writeFileSync(path, output);
-                    }
-                    settings = JSON.parse(read_file("/home/pi/SmartDisplayPi/settings.json"));
-                    settings.devmode = true;
-                    write_file("/home/pi/SmartDisplayPi/settings.json", JSON.stringify(settings));
-                    console.log("Rebooting")
+                    const Store = require('electron-store');
+                    const settings = new Store();
+                    settings.set("devMode", true);
+                    console.log("Rebooting");
                     var exec = require('child_process').exec;
-
-                    // Create shutdown function
-                    function shutdown(callback) {
-                        exec('shutdown -r now', function (error, stdout, stderr) { callback(stdout); });
-                    }
-
-                    // Reboot computer
-                    shutdown(function (output) {
-                        console.log(output);
-                    });
-                    // Reboot
+                    exec('sudo reboot', function (error, stdout, stderr) { callback(stdout); });
                 }, 5100)
             }
             else {

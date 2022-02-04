@@ -18,19 +18,24 @@
 </head>
 
 <body>
-  <a id="bar2" href="http://localhost:8123/config/dashboard"></a>
-  <a href="http://localhost:8123/config/dashboard"><img id="halogoset" src="halogo.png"></a>
-  <div id="hatext">Home Assistant</div>
-  <div id="hadescr">Control and manage Home Assistant</div>
-  <a id="bar3" href="http://localhost:8081/index.php?page=wpa_conf"></a>
-  <a href="http://localhost:8081/index.php?page=wpa_conf"><img id="raspaplogoset" src="raspAP-logo.png"></a>
-  <div id="raspaptext">RasAP</div>
-  <div id="raspapdescr">Control and manage network settings via RaspAP</div>
-  <a id="bar4" href="Setup/wizardhome.html"></a>
-  <a id="setupcircle" href="Setup/wizardhome.html"></a>
-  <div id="chrometext">Setup Wizard</div>
-  <div id="chromedescr">Launch Setup Wizard</div>
-
+  <div class="setting-menu" onclick="window.location = 'http://localhost:8123/config/dashboard'">
+    <img src="media/halogo.png">
+    <br>
+    <h1>Home Assistant</h1>
+    <p>Control and manage Home Assistant</p>
+  </div>
+  <div class="setting-menu" onclick="window.location = 'http://localhost:8081/index.php?page=wpa_conf'">
+    <img src="media/raspAP-logo.png">
+    <br>
+    <h1>RasAP</h1>
+    <p>Control and manage network settings via RaspAP</p>
+  </div>
+  <div class="setting-menu" onclick="window.location = 'Setup/wizardhome.html'">
+    <img src="media/setup.png">
+    <br>
+    <h1>Setup Wizard</h1>
+    <p>Launch Setup Wizard</p>
+  </div>
   <div id="bar1"></div>
   <div class="animate__animated animate__slideInUp" id="shortcuts">
     <a href="http://localhost:8123" id="first-image"><img src="media/halogo.png"></a>
@@ -44,37 +49,21 @@
     <div id="homesquare"></div>
   </div>
   <script>
-    var fs = require("fs");
-    read_file = function (path) {
-      return fs.readFileSync(path, 'utf8');
-    }
-
-    write_file = function (path, output) {
-      fs.writeFileSync(path, output);
-    }
-    settings = JSON.parse(read_file("/home/pi/SmartDisplayPi/settings.json"));
-    if (settings.devmode == true) {
+    const Store = require('electron-store');
+    const settings = new Store();
+    if (settings.get("devMode", false) == true) {
       document.getElementById("exitdev").style.display = "block";
-    }
-    document.getElementById("exitdev").onclick = function () {
-      q = confirm("Are you sure you want to exit developer mode?");
-      if (q) {
-        settings.devmode = false;
-        write_file("/home/pi/SmartDisplayPi/settings.json", JSON.stringify(settings));
-        console.log("Rebooting")
-        var exec = require('child_process').exec;
-
-        // Create shutdown function
-        function shutdown(callback) {
-          exec('shutdown -r now', function (error, stdout, stderr) { callback(stdout); });
+      document.getElementById("exitdev").onclick = () => {
+        q = confirm("Are you sure you want to exit developer mode? (You will also reboot)");
+        if (q) {
+          settings.set("devMode", true);
+          console.log("Rebooting");
+          var exec = require('child_process').exec;
+          exec('sudo reboot', function (error, stdout, stderr) { callback(stdout); });
         }
-
-        // Reboot computer
-        shutdown(function (output) {
-          console.log(output);
-        });
       }
     }
+
   </script>
   <script src="universal.js"></script>
 

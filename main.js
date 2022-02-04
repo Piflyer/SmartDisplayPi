@@ -11,12 +11,15 @@ const createWindow = () => {
     })
 
     win.loadFile('index.html')
-    if (JSON.parse(require('fs').readFileSync('./settings.json', 'utf8'))['devmode'] == false) {
+    const Store = require('electron-store');
+    const settings = new Store();
+    if (settings.get("devMode", false) == false) {
         win.kiosk = true
     }
-    const contents = win.webContents
-    console.log(contents)
+    else {
+        win.openDevTools();
+    }
 }
 app.whenReady().then(() => {
     createWindow()
-})
+});

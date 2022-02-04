@@ -22,6 +22,7 @@
     "desandro-matches-selector": "^2.0.2",
     "detect-node": "^2.1.0",
     "duplexer3": "^0.1.4",
+    "electron-store": "^8.0.1",
     "encodeurl": "^1.0.2",
     "end-of-stream": "^1.4.4",
     "env-paths": "^2.2.1",
