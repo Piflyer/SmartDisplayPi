@@ -41,15 +41,15 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 * [Google Assistant SDK](https://github.com/googlesamples/assistant-sdk-python)
 * [GassistPi](https://github.com/shivasiddharth/GassistPi)
 * [Home Assistant](https://www.home-assistant.io/)
-* [RaspAP](https://github.com/billz/raspap-webgui)
+* <s>[RaspAP](https://github.com/billz/raspap-webgui)</s>
 * [Google Photos PhotoFrame](https://github.com/googlesamples/google-photos)
 * [Snowboy](https://snowboy.kitt.ai)
 * [Electron](https://www.electronjs.org/)
-* [PWA](https://github.com/googlecodelabs/your-first-pwapp)
+* <s>[PWA](https://github.com/googlecodelabs/your-first-pwapp)</s>
 * [Blue-ALSA](https://github.com/Arkq/bluez-alsa)
 * [rpi-audio-receiver-master](https://github.com/nicokaiser/rpi-audio-receiver)
 * [ffmpeg camera](https://einar.slaskete.net/2018/08/16/using-a-raspberry-pi-as-a-surveillance-camera-in-home-assistant/)
-* [Flickity.js](https://flickity.metafizzy.co/)
+* <s>[Flickity.js](https://flickity.metafizzy.co/)</s>
 
 ## Further Development
 In the near future, we would love to see SmartDisplayPi to all be controlled by without using command line. If anyone would like to help us push forward towards that goal, or even help us with the widget store, please send us a pull request. Thanks!
