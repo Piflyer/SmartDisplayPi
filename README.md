@@ -33,7 +33,7 @@ This is still in development. Google Assistant is currently broken due to the li
 ## Installation guide:
 <s>It is *recommended* that you use our pre-built images in our [**releases**](https://github.com/piflyer/SmartDisplayPi/releases) tab. Our images are based on Raspbian Buster Lite. We will posting an installer soon if you are up for the challenge. Head over to our Wiki for more information and known bugs.</s><br>
 Simply run:
-`wget https://raw.githubusercontent.com/Sid220/SmartDisplayPi/master/install.sh -O install.sh && chmod +x install.sh && ./install.sh` <b>IN A FRESH INSTALL OF UBUNTU 21.10</b>
+`wget https://tinyurl.com/installsmartdisplay -O install.sh && chmod +x install.sh && ./install.sh` <b>IN A FRESH INSTALL OF UBUNTU 21.10</b>
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Any help or feedback will greatly be appreciated.
