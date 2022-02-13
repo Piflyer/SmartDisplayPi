@@ -32,9 +32,9 @@ if [ $? != 0 ]; then
         exit 1
     fi
 fi
-sudo apt install xdm npm -y
+sudo apt install npm openbox xinit slim -y
 if [ $? != 0 ]; then
-    echo "There was an error installing XDM or NPM. Look above for more info."
+    echo "There was an error installing Slim, OpenBox, Xinit, or NPM. Look above for more info."
     echo -n "Would you like to continue anyway? (y/n): "
     read continue3
     if [ $continue3 = "y" ]; then
