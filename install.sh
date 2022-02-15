@@ -66,5 +66,5 @@ if [ $? != 0 ]; then
         exit 1
     fi
 fi
-sudo systemctl enable xdm
-sudo systemctl start xdm
+echo "Rebooting..."
+sudo reboot
