@@ -17,11 +17,11 @@ function preloadImages(array) {
         img.src = array[i];
     }
 }
-nextImage = "https://pixabay.com/get/ge4ce8133906f0076c8779cde35ee0cffa499a722ff6664c7ba50190a1bc553a28cb19ad2502ad74f2fc35406119dedee50b56f306e28c771ba2a09f761392596_1280.jpg";
+nextImage = "https://pixabay.com/get/gf662d049a10581eecc0f7a1b25104e8ee04a5f61c86a19a542123b0e5a4f407c64a5021a433885414ef7f104618a8b9391dfdb0390bbf8a96190db4bb17ba7f2_1280.jpg";
 function updateBackground() {
     document.getElementById("background").style.backgroundImage = "url(" + nextImage + ")";
     setTimeout(() => {
-        fetch("http://192.168.1.181/smartdisplaypi-backend/background.php")
+        fetch("https://www.vestal.ml/smartdisplaypi-backend/background.php")
             .then(response => response.text())
             .then(data => {
                 nextImage = data;
