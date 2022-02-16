@@ -49,9 +49,9 @@
   <div id="homebutton" onclick="closeopen()">
     <div id="homesquare"></div>
   </div>
+  <script src="scripts/universal.js"></script>
+
   <script>
-    const Store = require('electron-store');
-    const settings = new Store();
     if (settings.get("devMode", false) == true) {
       document.getElementById("exitdev").style.display = "block";
       document.getElementById("exitdev").onclick = () => {
@@ -76,7 +76,6 @@
     }
 
   </script>
-  <script src="universal.js"></script>
 
 </body>
 

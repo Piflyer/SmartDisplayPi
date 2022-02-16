@@ -29,3 +29,5 @@ resize();
 // DEVELOPMENT PURPOSES ONLY!!!
 window.addEventListener('resize', resize);
 // Back to your regularly scheduled programming.
+const Store = require('electron-store');
+const settings = new Store();
