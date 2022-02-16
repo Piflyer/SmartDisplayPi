@@ -32,12 +32,23 @@ if [ $? != 0 ]; then
         exit 1
     fi
 fi
-sudo apt install npm openbox xinit slim -y
+sudo apt install npm openbox xinit slim dbus-x11 network-manager -y
 if [ $? != 0 ]; then
-    echo "There was an error installing Slim, OpenBox, Xinit, or NPM. Look above for more info."
+    echo "There was an error installing Slim, NetworkManager, OpenBox, Xinit, or NPM. Look above for more info."
     echo -n "Would you like to continue anyway? (y/n): "
     read continue3
     if [ $continue3 = "y" ]; then
+        echo "Continuing anyway..."
+    else
+        exit 1
+    fi
+fi
+sudo apt install gnome-control-center --no-install-recommends --no-install-suggests -y
+if [ $? != 0 ]; then
+    echo "There was an error installing GNOME Control Centre. Look above for more info."
+    echo -n "Would you like to continue anyway? (y/n): "
+    read continue4
+    if [ $continue4 = "y" ]; then
         echo "Continuing anyway..."
     else
         exit 1
@@ -47,8 +58,8 @@ git clone https://github.com/Sid220/SmartDisplayPi.git
 if [ $? != 0 ]; then
     echo "There was an error cloning the git repo. Look above for more info. It could be you are not connected to the internet."
     echo -n "Would you like to continue anyway? (y/n): "
-    read continue4
-    if [ $continue4 = "y" ]; then
+    read continue5
+    if [ $continue5 = "y" ]; then
         echo "Continuing anyway..."
     else
         exit 1
@@ -59,8 +70,8 @@ npm install
 if [ $? != 0 ]; then
     echo "There was an error installing the required NPM packages. Look above for more info."
     echo -n "Would you like to continue anyway? (y/n): "
-    read continue5
-    if [ $continue5 = "y" ]; then
+    read continue6
+    if [ $continue6 = "y" ]; then
         echo "Continuing anyway..."
     else
         exit 1

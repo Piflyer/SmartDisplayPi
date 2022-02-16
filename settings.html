@@ -36,6 +36,12 @@
     <h1>Setup Wizard</h1>
     <p>Launch Setup Wizard</p>
   </div>
+  <div class="setting-menu" onclick="gnomeControlCentre()">
+    <img src="media/gnome-control-center.png">
+    <br>
+    <h1>Gnome Control Centre</h1>
+    <p>Configure advanced settings like VPNs with Gnome Control Centre</p>
+  </div>
   <div id="bar1"></div>
   <div class="animate__animated animate__slideInUp" id="shortcuts">
     <a href="http://localhost:8123" id="first-image"><img src="media/halogo.png"></a>
@@ -62,6 +68,16 @@
           exec('sudo reboot', function (error, stdout, stderr) { callback(stdout); });
         }
       }
+    }
+    function gnomeControlCentre() {
+      if (settings.get("firstTimeOpeningExternalApp", true)) {
+        alert("Do not click minimize after this window is opened, it will disappear until reboot and will slow down your smartdisplay until then.");
+        settings.set("firstTimeOpeningExternalApp", false);
+        gnomeControlCentre();
+        return;
+      }
+      var exec = require('child_process').exec;
+      exec('gnome-control-center', function (error, stdout, stderr) { console.log(stdout); console.log(stderr); if (error) throw error; });
     }
 
   </script>
