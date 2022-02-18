@@ -46,6 +46,10 @@ window.onload = function () {
         initLayout: false, // disable initial layout
     });
     if (settings.get("editingHome", false)) {
+        webviews = document.getElementsByTagName("webview");
+        for (let i = 0; i < webviews.length; i++) {
+            webviews[i].src = "NOT A REAL URL, IGNORE THIS ERROR";
+        }
         const Draggabilly = require('draggabilly');
         // external js: packery.pkgd.js, draggabilly.pkgd.js
 

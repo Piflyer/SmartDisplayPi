@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+</head>
+
+<body style="margin: 0; background-color: #EFEFEF;">
+    <center>
+        <h1>Click to load</h1>
+        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
+            class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+            <path
+                d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+        </svg>
+    </center>
+    <script>
+        document.body.onclick = () => {
+            var url = new URLSearchParams(window.location.search).get('url');
+            window.location = url;
+        }
+
+    </script>
+</body>
+
+</html>
