@@ -18,7 +18,7 @@ function closeopen() {
     }
 }
 document.getElementById("homebutton").addEventListener("dblclick", () => {
-    window.location = "index.html";
+    window.location = require('electron-root-path').rootPath + "/index.html";
 })
 function resize() {
     document.getElementById("first-image").style.marginLeft = (document.getElementById("first-image").offsetWidth + (0.015 * document.body.offsetWidth)) + "px";

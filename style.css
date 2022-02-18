@@ -55,38 +55,52 @@ webview {
   height: 75%;
 }
 
+#editingBar {
+  background-color: green;
+}
+
+#settingsMenuBar {
+  background-color: black;
+}
+
+#settingsMenuBar, #editingBar {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  color: white;
+  padding: 10px;
+  z-index: 3;
+}
+
+#editingBarButton {
+  position: absolute;
+  right: 30px;
+}
+
+
 .widget {
-  width: 300px;
-  height: 400px;
   background: #EFEFEF;
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
   border-radius: 35px;
-  margin-right: 3.3333%;
   margin-bottom: 3.3333%;
-  margin-top: 2%;
 }
 
 
 .widget h3 {
-  margin-top: 10%;
-  margin-left: 25%;
+  margin-left: 10%;
 }
 
-.widget iframe {
-  width: 95%;
-  height: 80%;
+.widget webview {
+  width: 100%;
+  height: 90%;
   overflow: hidden;
   overflow-x: hidden;
   scrollbar-width: none;
-  border-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
-
-.widget iframe::-webkit-scrollbar {
-  display: none;
-}
-
-
-
 
 #name {
   position: absolute;
@@ -189,7 +203,7 @@ webview {
 }
 
 #homebutton {
-  position: absolute;
+  position: fixed;
   left: 0.75%;
   bottom: 0.75%;
 
