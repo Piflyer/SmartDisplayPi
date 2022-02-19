@@ -94,11 +94,20 @@
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span><br>
-            <form>
-                Name: <input required type="text"><br>
-                URL (Including Protocol): <input required type="text"><br>
+            <form onsubmit="createWidget();">
+                Name: <input oninput="updatePreview('name');" required id="name2" type="text"><br>
+                URL (Including Protocol): <input oninput="updatePreview('url');" id="url" required type="text"><br>
+                Preview:
+                <div id="preview" class="widget">
+                    <h3></h3>
+                    <webview
+                        useragent="Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36">
+                    </webview>
+                </div>
                 <input type="submit" value="Done">
+
             </form>
+
         </div>
 
     </div>
@@ -119,29 +128,18 @@
         Widgets
     </h1>
 
-    <ul>
-        <li id="cal">Calendar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                <path
-                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
-            </svg></li>
-        <li id="weat">Weather <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                <path
-                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
-            </svg></li>
-        <li id="traf">Traffic <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                <path
-                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
-            </svg></li>
+    <ul id="ul">
         <li onclick="openForm()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                 <path
                     d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
             </svg> New</li>
     </ul>
-    <a href="#" onclick="settings.set(`editingHome`, true); window.location = '../index.html'">Edit widget locations</a>
+    <a href="#" onclick="settings.set(`editingHome`, true); window.location = '../index.html'">Edit widget
+        locations</a><br><br>
+    <input type="checkbox" oninput="settings.set('autoloadWidgets', this.checked)" id="autoload"> <label
+        for="autoload">Autoload widgets on startup (highly
+        unrecommended)</label>
     <p>Widget width:
         30px <input id="width" oninput="changeSize()" type="range" min="30" max="500"> 500px</p>
     <p>Widget height:
@@ -150,6 +148,9 @@
     <script>
         document.getElementById("width").value = settings.get("widgetWidth", 200);
         document.getElementById("height").value = settings.get("widgetHeight", 200);
+        document.getElementById("preview").style.width = settings.get("widgetWidth", 200) + "px";
+        document.getElementById("preview").style.height = settings.get("widgetHeight", 200) + "px";
+        document.getElementById("autoload").checked = settings.get("autoloadWidgets", false);
         function changeSize() {
             document.getElementById("example").style.width = document.getElementById("width").value + "px";
             document.getElementById("example").style.height = document.getElementById("height").value + "px";
@@ -179,13 +180,58 @@
                 }
             }
         }
+        var widgets = settings.get("widgets", [
+            {
+                name: "Traffic",
+                url: "https://www.google.com/maps/"
+            },
+            {
+                name: "Weather",
+                url: "https://weather.com/weather/today/"
+            },
+            {
+                name: "Calendar",
+                url: "https://calendar.google.com/calendar/u/0/r/customday"
+            }]);
         window.onload = () => {
-            settings.get("widgets", [
-                { "Traffic": "https://www.google.com/maps/" },
-                { "Weather": "https://weather.com/weather/today/" },
-                { "Calendar": "https://calendar.google.com/calendar/u/0/r/customday" }]).forEach(widget => {
-                    console.log(widget);
+            widgets.forEach(widget => {
+                var li = document.createElement("li");
+                li.innerHTML = widget.name + ` <a onclick="deleteWidget('` + widget.name + `')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+            </svg></a>`
+                document.getElementById("ul").appendChild(li);
+            });
+        }
+        function deleteWidget(name, url) {
+            // All of this was automatically generated by GitHub Copilot. Creepy. Worked first try without any editing.
+            widgets.splice(widgets.findIndex(item => item.name === name), 1);
+            settings.set("widgets", widgets);
+            window.location.reload();
+            settings.delete("dragPositions");
+
+        }
+        function createWidget() {
+            // I'm gonna be out of a job soon.
+            if (widgets.findIndex(item => item.name === document.getElementById("name2").value) !== -1) {
+                alert("Widget with that name already exists! Please choose another name or delete the existing widget.");
+                return;
+            }
+            widgets.push(
+                {
+                    name: document.getElementById("name2").value, url: document.getElementById("url").value
                 });
+            settings.set("widgets", widgets);
+            settings.delete("dragPositions");
+        }
+        function updatePreview(part) {
+            if (part == "name") {
+                document.getElementById("preview").getElementsByTagName("h3")[0].innerHTML = document.getElementById("name2").value;
+            }
+            else if (part == "url") {
+                document.getElementById("preview").getElementsByTagName("webview")[0].src = "../notloaded.html?url=" + document.getElementById("url").value;
+            }
         }
     </script>
     </div>

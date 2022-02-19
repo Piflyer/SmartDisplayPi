@@ -23,7 +23,13 @@
     <script>
         document.body.onclick = () => {
             var url = new URLSearchParams(window.location.search).get('url');
-            window.location = url;
+            try {
+                window.location = url;
+            }
+            catch (err) {
+                document.getElementsByTagName("h1")[0].innerHTML = "There was an error loading the page";
+                document.getElementsByTagName("h1")[0].style.color = "red";
+            }
         }
 
     </script>

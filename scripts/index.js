@@ -30,6 +30,54 @@ function updateBackground() {
     }, 2000);
 }
 window.onload = function () {
+    widgets = settings.get("widgets", [
+        {
+            name: "Traffic",
+            url: "https://www.google.com/maps/"
+        },
+        {
+            name: "Weather",
+            url: "https://weather.com/weather/today/"
+        },
+        {
+            name: "Calendar",
+            url: "https://calendar.google.com/calendar/u/0/r/customday"
+        }]);
+    widgets.forEach(widget => {
+        var webview = document.createElement("webview");
+        if (!settings.get("editingHome", false)) {
+            if (settings.get("autoloadWidgets", false)) {
+                webview.src = widget.url;
+            }
+            else {
+                webview.setAttribute("src", "notloaded.html?url=" + widget.url);
+            }
+        }
+        webview.setAttribute("useragent", "Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36");
+
+        var div = document.createElement("div");
+        div.classList.add("widget");
+        var h3 = document.createElement("h3");
+        h3.innerHTML = widget.name + ` <span onclick="kill(parentElement.parentElement.getElementsByTagName('webview')[0])" style="float: right; display: none;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
+            <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
+        </svg></span>`;
+        div.appendChild(h3);
+        div.appendChild(webview);
+        div.setAttribute("data-item-id", widgets.indexOf(widget));
+        document.getElementById("grid").appendChild(div);
+        webview.addEventListener("dom-ready", function () {
+            first = false;
+            if (webview.isLoading()) {
+                if (first == true) {
+                    first = false;
+                    return;
+                }
+                this.parentElement.getElementsByTagName("h3")[0].getElementsByTagName("span")[0].style.display = "block";
+            }
+        });
+    });
+
     updateBackground();
     setInterval(updateBackground, 30000);
     widgets = document.getElementsByClassName("widget");
@@ -46,10 +94,6 @@ window.onload = function () {
         initLayout: false, // disable initial layout
     });
     if (settings.get("editingHome", false)) {
-        webviews = document.getElementsByTagName("webview");
-        for (let i = 0; i < webviews.length; i++) {
-            webviews[i].src = "NOT A REAL URL, IGNORE THIS ERROR";
-        }
         const Draggabilly = require('draggabilly');
         // external js: packery.pkgd.js, draggabilly.pkgd.js
 
@@ -127,4 +171,8 @@ window.onload = function () {
     var initPositions = settings.get('dragPositions');
     // init layout with saved positions
     pckry.initShiftLayout(initPositions, 'data-item-id');
+}
+function kill(webview) {
+    let oldsrc = webview.src;
+    webview.src = "notloaded.html?url=" + oldsrc;
 }
