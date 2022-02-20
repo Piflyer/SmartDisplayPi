@@ -14,7 +14,7 @@ const createWindow = () => {
     const Store = require('electron-store');
     const settings = new Store();
     if (settings.get("devMode", false) == false) {
-        win.kiosk = true
+        //win.kiosk = true
     }
     else {
         win.openDevTools();

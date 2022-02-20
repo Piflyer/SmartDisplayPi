@@ -66,15 +66,15 @@ window.onload = function () {
         div.appendChild(webview);
         div.setAttribute("data-item-id", widgets.indexOf(widget));
         document.getElementById("grid").appendChild(div);
-        webview.addEventListener("dom-ready", function () {
-            first = false;
-            if (webview.isLoading()) {
-                if (first == true) {
-                    first = false;
-                    return;
-                }
-                this.parentElement.getElementsByTagName("h3")[0].getElementsByTagName("span")[0].style.display = "block";
-            }
+        webview.addEventListener("did-start-loading", function () {
+          if(webview.src.includes("notloaded.html?url=")) {
+            this.parentElement.getElementsByTagName("h3")[0].getElementsByTagName("span")[0].style.display = "none";
+
+          }
+          else {
+            this.parentElement.getElementsByTagName("h3")[0].getElementsByTagName("span")[0].style.display = "block";
+
+          }
         });
     });
 

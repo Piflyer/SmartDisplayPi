@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  </head>
+  <body>
+    <button id="backbtn">Back</button><button id="forward">Forward</button><button id="refresh">Refresh</button><input type="text" id="url">
+    <webview id="view"
+        useragent="Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36">
+    </webview>
+    <script>
+      var ById = function (id) {
+    return document.getElementById(id);
+}
+var favicon = require('favicon-getter').default;
+var path = require('path');
+var uuid = require('uuid');
+
+var back = ById('backbtn'),
+    forward = ById('forward'),
+    refresh = ById('refresh'),
+    omni = ById('url'),
+    view = ById('view');
+    function reloadView () {
+    view.reload();
+}
+
+function backView () {
+    view.goBack();
+}
+
+function forwardView () {
+    view.goForward();
+}
+function updateURL (event) {
+    if (event.keyCode === 13) {
+        omni.blur();
+        let val = omni.value;
+        let https = val.slice(0, 8).toLowerCase();
+        let http = val.slice(0, 7).toLowerCase();
+        if (https === 'https://') {
+            view.loadURL(val);
+        } else if (http === 'http://') {
+            view.loadURL(val);
+        } else {
+        view.loadURL('http://'+ val);
+        }
+    }
+}
+function handleUrl (event) {
+    if (event.target.className === 'link') {
+        event.preventDefault();
+        view.loadURL(event.target.href);
+    } else if (event.target.className === 'favicon') {
+        event.preventDefault();
+        view.loadURL(event.target.parentElement.href);
+    }
+}
+
+function handleDevtools () {
+    if (view.isDevToolsOpened()) {
+        view.closeDevTools();
+    } else {
+        view.openDevTools();
+    }
+}
+
+function updateNav (event) {
+    omni.value = view.src;
+}
+refresh.addEventListener('click', reloadView);
+back.addEventListener('click', backView);
+forward.addEventListener('click', forwardView);
+omni.addEventListener('keydown', updateURL);
+popup.addEventListener('click', handleUrl);
+dev.addEventListener('click', handleDevtools);
+view.addEventListener('did-finish-load', updateNav);
+    </script>
+      <div class="animate__animated animate__slideInUp" id="shortcuts">
+      <a href="http://localhost:8123" id="first-image"><img src="media/halogo.png"></a>
+      <a href="https://www.youtube.com/tv"><img src="media/youtube.png"></a>
+      <a href="ambient.html"><img src="media/gclock.png"></a>
+      <a href="webview.html?url=https://www.tasty.co"><img src="media/tastylogo.jpeg"></a>
+      <a href="http://127.0.0.1:8080/"><img src="media/googlephotos.png"></a>
+      <a href="settings.html"><img src="media/settings.png"></a>
+      <a href="browser.html"><img src="media/Chromium_Material_Icon.png"></a>
+    </div>
+    <div id="homebutton" onclick="closeopen()">
+      <div id="homesquare"></div>
+    </div>
+    <script src="scripts/universal.js"></script>
+  </body>
+</html>
