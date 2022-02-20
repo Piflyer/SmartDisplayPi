@@ -15,9 +15,6 @@
       var ById = function (id) {
     return document.getElementById(id);
 }
-var favicon = require('favicon-getter').default;
-var path = require('path');
-var uuid = require('uuid');
 
 var back = ById('backbtn'),
     forward = ById('forward'),
@@ -42,11 +39,11 @@ function updateURL (event) {
         let https = val.slice(0, 8).toLowerCase();
         let http = val.slice(0, 7).toLowerCase();
         if (https === 'https://') {
-            view.loadURL(val);
+            view.src = val;
         } else if (http === 'http://') {
-            view.loadURL(val);
+            view.src = val;
         } else {
-        view.loadURL('http://'+ val);
+        view.src = 'http://'+ val;
         }
     }
 }
@@ -75,8 +72,6 @@ refresh.addEventListener('click', reloadView);
 back.addEventListener('click', backView);
 forward.addEventListener('click', forwardView);
 omni.addEventListener('keydown', updateURL);
-popup.addEventListener('click', handleUrl);
-dev.addEventListener('click', handleDevtools);
 view.addEventListener('did-finish-load', updateNav);
     </script>
       <div class="animate__animated animate__slideInUp" id="shortcuts">
