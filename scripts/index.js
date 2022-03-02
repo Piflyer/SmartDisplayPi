@@ -67,14 +67,14 @@ window.onload = function () {
         div.setAttribute("data-item-id", widgets.indexOf(widget));
         document.getElementById("grid").appendChild(div);
         webview.addEventListener("did-start-loading", function () {
-          if(webview.src.includes("notloaded.html?url=")) {
-            this.parentElement.getElementsByTagName("h3")[0].getElementsByTagName("span")[0].style.display = "none";
+            if (webview.src.includes("notloaded.html?url=")) {
+                this.parentElement.getElementsByTagName("h3")[0].getElementsByTagName("span")[0].style.display = "none";
 
-          }
-          else {
-            this.parentElement.getElementsByTagName("h3")[0].getElementsByTagName("span")[0].style.display = "block";
+            }
+            else {
+                this.parentElement.getElementsByTagName("h3")[0].getElementsByTagName("span")[0].style.display = "block";
 
-          }
+            }
         });
     });
 
@@ -90,7 +90,7 @@ window.onload = function () {
     var pckry = new Packery(grid, {
         itemSelector: '.widget',
         percentPosition: true,
-        columnWidth: parseInt(settings.get("widgetWidth", 200)) - 150,
+        columnWidth: parseInt(settings.get("widgetWidth", 200)) + 10,
         initLayout: false, // disable initial layout
     });
     if (settings.get("editingHome", false)) {

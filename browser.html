@@ -1,91 +1,280 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/7.css">
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        button {
+            min-width: 0 !important;
+            min-height: 0 !important;
+        }
 
-  </head>
-  <body>
-    <button id="backbtn">Back</button><button id="forward">Forward</button><button id="refresh">Refresh</button><input type="text" id="url">
-    <webview id="view"
+        input#url {
+            height: 40px;
+            font-size: 20px;
+        }
+
+        button#backbtn {
+            border-radius: 50%;
+            transform: scale(1.3);
+            border-color: #72a2c5;
+            background: linear-gradient(180deg, #e5f4fd 45%, #b3e0f9 0);
+            width: 40px;
+            height: 40px;
+            margin-left: 7px;
+        }
+
+        #url {
+            width: 70%;
+        }
+
+        button#forward,
+        button#refresh,
+        button#fave {
+            border-radius: 50%;
+            background-color: #cacaca;
+            width: 40px;
+            height: 40px;
+        }
+
+        button#forward {
+            margin-left: 4px;
+        }
+
+        #navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            z-index: 1;
+            padding-top: 10px;
+            background-color: #f5f5f5;
+        }
+
+        #view {
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 60px);
+            z-index: -1;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+
+<body style="margin: 0;">
+    <div id="navigation">
+        <button id="backbtn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                    d="M447.1 256C447.1 273.7 433.7 288 416 288H109.3l105.4 105.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448s-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L109.3 224H416C433.7 224 447.1 238.3 447.1 256z" />
+            </svg></button>
+        <button id="forward">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                    d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z" />
+            </svg></button>
+        <button id="refresh">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                    d="M496 48V192c0 17.69-14.31 32-32 32H320c-17.69 0-32-14.31-32-32s14.31-32 32-32h63.39c-29.97-39.7-77.25-63.78-127.6-63.78C167.7 96.22 96 167.9 96 256s71.69 159.8 159.8 159.8c34.88 0 68.03-11.03 95.88-31.94c14.22-10.53 34.22-7.75 44.81 6.375c10.59 14.16 7.75 34.22-6.375 44.81c-39.03 29.28-85.36 44.86-134.2 44.86C132.5 479.9 32 379.4 32 256s100.5-223.9 223.9-223.9c69.15 0 134 32.47 176.1 86.12V48c0-17.69 14.31-32 32-32S496 30.31 496 48z" />
+            </svg></button>
+        <span id="omnibox">
+            <input onClick="this.select();" type="text" id="url">
+        </span>
+        <button id="fave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                    d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z" />
+            </svg></button>
+        <div id="fave-popup" data-state="closed">
+        </div>
+        <div id="list">
+            <i class="fa fa-list" aria-hidden="true"></i>
+        </div>
+    </div>
+    <webview id="view" src="https://google.com"
         useragent="Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36">
     </webview>
     <script>
-      var ById = function (id) {
-    return document.getElementById(id);
-}
-
-var back = ById('backbtn'),
-    forward = ById('forward'),
-    refresh = ById('refresh'),
-    omni = ById('url'),
-    view = ById('view');
-    function reloadView () {
-    view.reload();
-}
-
-function backView () {
-    view.goBack();
-}
-
-function forwardView () {
-    view.goForward();
-}
-function updateURL (event) {
-    if (event.keyCode === 13) {
-        omni.blur();
-        let val = omni.value;
-        let https = val.slice(0, 8).toLowerCase();
-        let http = val.slice(0, 7).toLowerCase();
-        if (https === 'https://') {
-            view.src = val;
-        } else if (http === 'http://') {
-            view.src = val;
-        } else {
-        view.src = 'http://'+ val;
+        var ById = function (id) {
+            return document.getElementById(id);
         }
-    }
-}
-function handleUrl (event) {
-    if (event.target.className === 'link') {
-        event.preventDefault();
-        view.loadURL(event.target.href);
-    } else if (event.target.className === 'favicon') {
-        event.preventDefault();
-        view.loadURL(event.target.parentElement.href);
-    }
-}
+        var jsonfile = require('jsonfile');
+        var favicon = require('favicon-getter').default;
+        var path = require('path');
+        var uuid = require('uuid');
+        var bookmarks = path.join(__dirname, 'bookmarks.json');
 
-function handleDevtools () {
-    if (view.isDevToolsOpened()) {
-        view.closeDevTools();
-    } else {
-        view.openDevTools();
-    }
-}
+        var back = ById('backbtn'),
+            forward = ById('forward'),
+            refresh = ById('refresh'),
+            omni = ById('url'),
+            fave = ById('fave'),
+            list = ById('list'),
+            popup = ById('fave-popup'),
+            view = ById('view');
+        function reloadView() {
+            view.reload();
+        }
 
-function updateNav (event) {
-    omni.value = view.src;
-}
-refresh.addEventListener('click', reloadView);
-back.addEventListener('click', backView);
-forward.addEventListener('click', forwardView);
-omni.addEventListener('keydown', updateURL);
-view.addEventListener('did-finish-load', updateNav);
+        function backView() {
+            view.goBack();
+        }
+
+        function forwardView() {
+            view.goForward();
+        }
+        function validURL(str) {
+            var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+                '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+                '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+                '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+                '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+                '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+            if (!!pattern.test(str)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function updateURL(event) {
+            if (event.keyCode === 13) {
+                omni.blur();
+                let val = omni.value;
+                if (val === "") {
+                    view.loadURL(settings.get('homepage', 'https://google.com'));
+                    return;
+                }
+                let https = val.slice(0, 8).toLowerCase();
+                let http = val.slice(0, 7).toLowerCase();
+                if (https === 'https://' || http === 'http://') {
+                    view.loadURL(val);
+                } else {
+                    if (validURL("http://" + val)) {
+                        view.loadURL("http://" + val);
+                    } else {
+                        view.loadURL("https://www.google.com/search?q=" + val);
+                    }
+                }
+            }
+        }
+        var Bookmark = function (id, url, faviconUrl, title) {
+            this.id = id;
+            this.url = url;
+            this.icon = faviconUrl;
+            this.title = title;
+        }
+
+        Bookmark.prototype.ELEMENT = function () {
+            var a_tag = document.createElement('a');
+            a_tag.href = this.url;
+            a_tag.className = 'link';
+            a_tag.textContent = this.title;
+            var favimage = document.createElement('img');
+            favimage.src = this.icon;
+            favimage.className = 'favicon';
+            a_tag.insertBefore(favimage, a_tag.childNodes[0]);
+            return a_tag;
+        }
+        function addBookmark() {
+            let url = view.src;
+            let title = view.getTitle();
+            favicon(url).then(function (fav) {
+                let book = new Bookmark(uuid.v1(), url, fav, title);
+                tmp = settings.get("bookmarks", []);
+                tmp.push(book);
+                settings.set("bookmarks", tmp);
+            })
+        }
+        function openPopUp(event) {
+            let state = popup.getAttribute('data-state');
+            if (state === 'closed') {
+                popup.innerHTML = '';
+                jsonfile.readFile(bookmarks, function (err, obj) {
+                    if (obj.length !== 0) {
+                        for (var i = 0; i < obj.length; i++) {
+                            let url = obj[i].url;
+                            let icon = obj[i].icon;
+                            let id = obj[i].id;
+                            let title = obj[i].title;
+                            let bookmark = new Bookmark(id, url, icon, title);
+                            let el = bookmark.ELEMENT();
+                            popup.appendChild(el);
+                        }
+                    }
+                    popup.style.display = 'block';
+                    popup.setAttribute('data-state', 'open');
+                });
+            } else {
+                popup.style.display = 'none';
+                popup.setAttribute('data-state', 'closed');
+            }
+        }
+        function handleUrl(event) {
+            if (event.target.className === 'link') {
+                event.preventDefault();
+                view.loadURL(event.target.href);
+            } else if (event.target.className === 'favicon') {
+                event.preventDefault();
+                view.loadURL(event.target.parentElement.href);
+            }
+        }
+
+
+        function updateNav(event) {
+            omni.value = view.getURL();
+            if (view.canGoBack()) {
+                back.disabled = false;
+                back.style.transform = 'scale(1.3)';
+                back.style.background = "linear-gradient(180deg, #e5f4fd 45%, #b3e0f9 0)";
+                back.style.borderColor = "#72a2c5";
+            } else {
+                back.disabled = true;
+                back.style.transform = 'scale(1)';
+                back.style.background = "linear-gradient(180deg, #eee 45%, #ddd 0, #bbb)";
+                back.style.borderColor = "#888";
+            }
+            if (view.canGoForward()) {
+                forward.disabled = false;
+            } else {
+                forward.disabled = true;
+            }
+        }
+        refresh.addEventListener('click', reloadView);
+        back.addEventListener('click', backView);
+        forward.addEventListener('click', forwardView);
+        omni.addEventListener('keydown', updateURL);
+        fave.addEventListener('click', addBookmark);
+        list.addEventListener('click', openPopUp);
+        popup.addEventListener('click', handleUrl);
+        view.addEventListener('did-navigate-in-page', updateNav);
+        view.addEventListener('did-navigate', updateNav);
+        view.addEventListener('did-fail-load', (error) => {
+            omni.value = 'Error loading page: ' + error.errorDescription;
+            console.error(error);
+        });
     </script>
-      <div class="animate__animated animate__slideInUp" id="shortcuts">
-      <a href="http://localhost:8123" id="first-image"><img src="media/halogo.png"></a>
-      <a href="https://www.youtube.com/tv"><img src="media/youtube.png"></a>
-      <a href="ambient.html"><img src="media/gclock.png"></a>
-      <a href="webview.html?url=https://www.tasty.co"><img src="media/tastylogo.jpeg"></a>
-      <a href="http://127.0.0.1:8080/"><img src="media/googlephotos.png"></a>
-      <a href="settings.html"><img src="media/settings.png"></a>
-      <a href="browser.html"><img src="media/Chromium_Material_Icon.png"></a>
+    <div class="animate__animated animate__slideInUp" id="shortcuts">
+        <a href="http://localhost:8123" id="first-image"><img src="media/halogo.png"></a>
+        <a href="https://www.youtube.com/tv"><img src="media/youtube.png"></a>
+        <a href="ambient.html"><img src="media/gclock.png"></a>
+        <a href="webview.html?url=https://www.tasty.co"><img src="media/tastylogo.jpeg"></a>
+        <a href="http://127.0.0.1:8080/"><img src="media/googlephotos.png"></a>
+        <a href="settings.html"><img src="media/settings.png"></a>
+        <a href="browser.html"><img src="media/Chromium_Material_Icon.png"></a>
     </div>
     <div id="homebutton" onclick="closeopen()">
-      <div id="homesquare"></div>
+        <div id="homesquare"></div>
     </div>
     <script src="scripts/universal.js"></script>
-  </body>
+</body>
+
 </html>
