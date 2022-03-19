@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/7.css">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://unpkg.com/json2url/dist/index.umd.js"></script>
+
+    <style>
+        #omni {
+            margin-top: 10vh;
+        }
+
+        #url {
+            margin: auto;
+            display: block;
+            width: 100%;
+            font-size: xx-large;
+            height: 50px;
+            outline: 0;
+            border: 1px solid #ccc;
+            border-top-color: #888;
+            border-radius: 2px;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        h1 {
+            margin: auto;
+        }
+
+
+        button {
+            min-width: 112.5px;
+            min-height: 34.5px;
+            padding: 0 12px;
+            margin-top: 10px;
+        }
+
+        button[type="submit"] {
+            margin-right: 40px;
+        }
+
+        .autocomplete {
+            display: flex;
+            text-align: left;
+            width: 70%;
+
+        }
+
+        .autocomplete-result-list {
+            z-index: 3;
+            width: 70%;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-top-color: #888;
+            border-radius: 2px;
+        }
+
+        .autocomplete-result-list li {
+            padding-top: 10px;
+            font-size: x-large;
+            padding-left: 4px;
+        }
+
+        #bookmarks {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .bookmark {
+            background: linear-gradient(180deg, #eee 45%, #ddd 0, #bbb);
+            border: 1.5px solid #888;
+            border-radius: 3px;
+            box-shadow: inset 0 -1px 1px #fff, inset 0 1px 1px #fff;
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            flex-grow: 0;
+        }
+
+        .bookmark p {
+            margin: auto;
+            font-size: x-large;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .bookmark img {
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: -15px;
+        }
+
+        #aboveSearch {
+            display: none;
+        }
+    </style>
+</head>
+
+<body style="margin: 0;">
+    <form method="GET" action="https://google.com/search">
+        <div id="omni">
+            <center>
+                <h1 id="title1">SmartDisplayPi</h1>
+                <p>Powered by Google</p>
+                <div id="aboveSearch"><button style="margin: 0;"
+                        onmousedown="document.getElementsByTagName('form')[0].submit();" type="submit">Search</button>
+                </div>
+                <div id="autocomplete" class="autocomplete">
+                    <input name="q" id="url" class="autocomplete-input" type="search"
+                        placeholder="Query the internet..." />
+                    <ul class="autocomplete-result-list"></ul>
+                </div>
+                <button type="submit">Search</button><button type="button" onclick="feelingHellaLucky()">Feeling
+                    Lucky,
+                    Punk?</button>
+
+            </center>
+            <div id="bookmarks">
+
+            </div>
+        </div>
+    </form>
+    <script>
+        const o = new MutationObserver(() => {
+            if (document.getElementById("url").getAttribute("aria-expanded") == "true") {
+                document.getElementById("aboveSearch").style.display = "block";
+                document.getElementById("title1").style.display = "none";
+            } else {
+                document.getElementById("aboveSearch").style.display = "none";
+                document.getElementById("title1").style.display = "block";
+            }
+        });
+        o.observe(document.getElementById("url"), {
+            attributes: true,
+            attributeFilter: ["aria-expanded"]
+        });
+        function feelingHellaLucky() {
+            var url
+            if ("" == document.getElementById("url").value) {
+                url = "https://www.google.com/search?q=google+doodles";
+            }
+            else {
+                url = "https://duckduckgo.com/?q=!ducky " + encodeURI(document.getElementById("url").value);
+            }
+            window.location.href = url;
+        }
+        new Autocomplete('#autocomplete', {
+            search: input => {
+                const url = `https://www.vestal.ml/smartdisplaypi-backend/googleSearchSuggest.php?q=${encodeURI(input)}`;
+                return new Promise(resolve => {
+                    if (input.length < 1) {
+                        return resolve([]);
+                    }
+                    fetch(url).
+                        then(response => response.json()).
+                        then(data => {
+                            resolve(data);
+                        });
+                });
+
+            },
+            onSubmit: result => {
+                window.location = (`https://www.google.com/search?q=${encodeURI(result)}`);
+            }
+        });
+        const bookmarks = json2Url.deserialize(decodeURI(window.location.search.substring(1)));
+        bookmarks.forEach(bookmark => {
+            let bookmarkElement = document.createElement("DIV");
+            bookmarkElement.className = "bookmark";
+            bookmarkElement.onclick = () => {
+                window.location.href = bookmark[1];
+            }
+            bookmarkElement.innerHTML = `<img src="${bookmark[2]}" alt="${bookmark[3]}"><br><p>${bookmark[3]}</p>`;
+            document.getElementById("bookmarks").appendChild(bookmarkElement);
+        });
+    </script>
+</body>
+
+</html>

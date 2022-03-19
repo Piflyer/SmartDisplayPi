@@ -32,7 +32,6 @@
     "escape-string-regexp": "^4.0.0",
     "ev-emitter": "^2.1.2",
     "extract-zip": "^1.7.0",
-    "favicon-getter": "^1.1.3",
     "fd-slicer": "^1.1.0",
     "fs-extra": "^8.1.0",
     "get-size": "^3.0.0",
@@ -62,6 +61,7 @@
     "npm-conf": "^1.1.3",
     "object-keys": "^1.1.1",
     "once": "^1.4.0",
+    "oreo.js": "^0.3.32",
     "p-cancelable": "^1.1.0",
     "packery": "^2.1.2",
     "pend": "^1.2.0",
@@ -88,6 +88,7 @@
     "universalify": "^0.1.2",
     "url-parse-lax": "^3.0.0",
     "util-deprecate": "^1.0.2",
+    "uuid": "^8.3.2",
     "wrappy": "^1.0.2",
     "yallist": "^4.0.0",
     "yauzl": "^2.10.0"

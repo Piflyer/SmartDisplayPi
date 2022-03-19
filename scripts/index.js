@@ -53,7 +53,7 @@ window.onload = function () {
                 webview.setAttribute("src", "notloaded.html?url=" + widget.url);
             }
         }
-        webview.setAttribute("useragent", "Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36");
+        webview.setAttribute("useragent", "Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36 SmartDisplayPi");
 
         var div = document.createElement("div");
         div.classList.add("widget");
