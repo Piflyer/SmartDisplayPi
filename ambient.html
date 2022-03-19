@@ -5,83 +5,92 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href='style.css' rel='stylesheet' />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
   <script>
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     function startTime() {
       var today = new Date();
       var h = today.getHours();
       var m = today.getMinutes();
       var s = today.getSeconds();
+      var month = today.getMonth();
+      var day = today.getDate();
+      var year = today.getFullYear();
+      var weekday = today.getDay();
       m = checkTime(m);
       s = checkTime(s);
-      document.getElementById('txt').innerHTML =
+      document.getElementById('clock').innerHTML =
         h + ":" + m;
-      var t = setTimeout(startTime, 500);
+      if (day == 1 || day == 21 || day == 31) {
+        day = day + "st";
+      }
+      else if (day == 2 || day == 22 || day == 32) {
+        day = day + "nd";
+      }
+      else if (day == 3 || day == 23) {
+        day = day + "rd";
+      }
+      else {
+        day = day + "th";
+      }
+      document.getElementById("date").innerHTML = days[weekday] + ", " + day + " " + months[month] + " " + year;
     }
+    setInterval(startTime, 1000);
     function checkTime(i) {
       if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
       return i;
     }
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: ['list'],
-      defaultView: 'listWeek'
-    });
-    function myFunction() {
-      var x = document.getElementById("shortcuts");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
-    }
   </script>
-  <style media="screen">
-    .div {
-      position: absolute;
-      width: 200px;
-      height: 81px;
-      left: 600px;
-      top: 399px;
-
-      font-family: Roboto;
+  <style>
+    #clock {
+      text-align: center;
       font-style: normal;
       font-weight: bold;
-      font-size: 65px;
-      line-height: 76px;
-
+      font-size: 150px;
       color: #808080;
+    }
 
+    #date {
+      text-align: center;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 50px;
+      color: #808080;
+      width: 100%;
+    }
+
+    #clocks {
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 100%;
+    }
+
+    #homebutton {
+      background: rgba(34, 34, 34, 0.25) !important;
     }
 
     body {
+      height: 100vh;
       background-color: #000000
     }
   </style>
 </head>
 
 <body onload="startTime()">
-
-  <div class="div" id="txt"></div>
-  <div id="shortcuts">
-    <div id="name">Howdy Tim!</div>
-    <a href="settings.html">
-      <div id="settings">Settings</div>
-    </a>
-    <a href="index.html">
-      <div id="ambient">Home</div>
-    </a>
-    <div id="apps">Apps:</div>
-    <a href="http://localhost:8123"><img id="homeassistant" src="halogo.png"></a>
-    <a href="https://www.youtube.com/tv"><img id="youtube" src="youtube.png"></a>
-    <a href="ambient.html"><img id="clock" src="gclock.png"></a>
-    <a href="https://www.tasty.co"><img id="tasty" src="tastylogo.jpeg"></a>
-    <div id="gphotosbg"></div>
-    <a href="http://127.0.0.1:8080/"><img id="gphotosimg" src="googlephotos.png"></a>
+  <div id="clocks">
+    <div id="clock"></div>
+    <div id="date"></div>
   </div>
-  <div id="homebutton">
+  <div onclick="window.location.href = 'index.html'" id="homebutton">
     <div id="homesquare" onclick="closeopen()"></div>
   </div>
   <script src="scripts/universal.js"></script>
-
+  <script>
+    closeopen();
+  </script>
 </body>
 
 </html>

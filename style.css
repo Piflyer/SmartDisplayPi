@@ -129,19 +129,6 @@ webview {
   color: #808080;
 }
 
-#ambient {
-  position: absolute;
-  width: 204px;
-  height: 40px;
-  left: 459px;
-  top: 16px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 35px;
-  color: #808080;
-}
-
 #apps {
   position: absolute;
   width: 86px;
@@ -166,33 +153,6 @@ webview {
   border-radius: 10px;
 }
 
-#youtube {
-  position: absolute;
-  width: 65px;
-  height: 65px;
-  left: 92px;
-  top: 114px;
-  border-radius: 10px;
-}
-
-#clock {
-  position: absolute;
-  height: 65px;
-  left: 167px;
-  top: 114px;
-  border-radius: 10px;
-}
-
-#tasty {
-  position: absolute;
-  width: 65px;
-  height: 65px;
-  left: 242px;
-  top: 114px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-}
-
 #music {
   position: absolute;
   width: 444px;
@@ -207,10 +167,10 @@ webview {
   position: fixed;
   left: 0.75%;
   bottom: 0.75%;
-
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.25);
   margin: 0;
+  z-index: 300;
 }
 
 #homesquare {
@@ -231,9 +191,13 @@ webview {
   bottom: 0;
   padding-top: 0.75%;
   background: #222222;
-  align-items: center;
+  white-space: nowrap;
+  overflow: auto;
 }
 
+#shortcuts a {
+  margin-left: 5px;
+}
 
 #shortcuts a img {
   max-height: 90%;
