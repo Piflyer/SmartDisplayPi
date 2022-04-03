@@ -34,6 +34,17 @@ if [ $continue1 = "y" ]; then
 else
     exit 1
 fi
+sudo apt update && sudo apt upgrade -y
+if [ $? != 0 ]; then
+    echo "There was an error updating. Look above for more info."
+    echo -n "Would you like to continue anyway? (y/n): "
+    read continue7
+    if [ $continue7 = "y" ]; then
+        echo "Continuing anyway..."
+    else
+        exit 1
+    fi
+fi
 sudo apt-get install xserver-xorg-core --no-install-recommends --no-install-suggests -y
 if [ $? != 0 ]; then
     echo "There was an error installing X. Look above for more info."
