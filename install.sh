@@ -1,3 +1,4 @@
+cd ~/
 echo "  ______                                       __      _______   __                      __                      _______   __ 
  /      \                                     /  |    /       \ /  |                    /  |                    /       \ /  |
 /$$$$$$  | _____  ____    ______    ______   _$$ |_   $$$$$$$  |$$/   _______   ______  $$ |  ______   __    __ $$$$$$$  |$$/ 
@@ -89,7 +90,11 @@ if [ $? != 0 ]; then
         exit 1
     fi
 fi
-sudo cp ./kiosk.sh /etc/profile
-sudo setcap CAP_SYS_BOOT=+ep /usr/local/bin/node
+echo "[Desktop Entry]
+Name=SmartDisplatPi
+Exec=~/SmartDisplayPi/kiosk.sh
+Terminal=false
+Type=Application" | sudo tee /etc/xdg/autostart/smartdisplay.desktop
+sudo setcap CAP_SYS_BOOT=+ep /usr/bin/node
 echo "Rebooting..."
 sudo reboot
