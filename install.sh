@@ -89,5 +89,7 @@ if [ $? != 0 ]; then
         exit 1
     fi
 fi
+sudo cp ./kiosk.sh /etc/profile
+sudo setcap CAP_SYS_BOOT=+ep /usr/local/bin/node
 echo "Rebooting..."
 sudo reboot
