@@ -7,35 +7,6 @@
     <link href='../style.css' rel='stylesheet' />
     <title>Settings</title>
     <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
-    <style>
-        input[type=text],
-        input[type=number] {
-            width: 70%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            box-sizing: border-box;
-            border: 3px solid #ccc;
-            -webkit-transition: 0.5s;
-            transition: 0.5s;
-            outline: none;
-        }
-
-        input[type=submit] {
-            padding: 12px 20px;
-            margin: 8px 0;
-            box-sizing: border-box;
-            border: 3px solid #ccc;
-            background-color: white;
-            -webkit-transition: 0.5s;
-            transition: 0.5s;
-            outline: none;
-        }
-
-        input[type=text]:focus,
-        input[type=submit]:hover {
-            border: 3px solid #555;
-        }
-    </style>
 </head>
 
 <body>
@@ -55,18 +26,28 @@
     <h1>
         Ambient
     </h1>
-    <input type="checkbox"
-        oninput="settings.set('ambient', this.checked); if(!this.checked) {document.getElementById('ambientTime').disabled = true;} else {document.getElementById('ambientTime').disabled = false;}"
-        id="ambient"> <label for="autoload">Automatically go into Ambient Mode</label><br><br>
-    <label for="autoload">after</label>
+    <label for="ambient">Automatically go into Ambient Mode</label><br>
+    <label class="switch">
+        <input type="checkbox"
+            oninput="settings.set('ambient', this.checked); if(!this.checked) {document.getElementById('ambientTime').disabled = true;} else {document.getElementById('ambientTime').disabled = false;}"
+            id="ambient">
+        <span class="slider"></span>
+    </label><br><br>
+    <label for="ambientTime">after</label>
     <input min="1" max="10000000" type="number" oninput="settings.set('ambientDelay', this.value)" id="ambientTime">
-    <label for="autoload">minutes of inactivity.</label>
+    <label for="ambientTime">minutes of inactivity.</label>
 
     </div>
     <script>
         document.getElementById("ambientTime").value = settings.get('ambientDelay', 30);
         document.getElementById("ambient").checked = settings.get('ambient', true);
         if (!document.getElementById("ambient").checked) { document.getElementById('ambientTime').disabled = true; }
+        const $ = require("jquery");
+        $(function () {
+            "use strict";
+
+            jqKeyboard.init();
+        });
     </script>
 </body>
 

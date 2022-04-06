@@ -22,7 +22,7 @@
     </center>
     <script>
         document.body.onclick = () => {
-            var url = new URLSearchParams(window.location.search).get('url');
+            var url = decodeURI(new URLSearchParams(window.location.search).get('url'));
             try {
                 window.location = url;
             }

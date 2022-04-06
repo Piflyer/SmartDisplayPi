@@ -2,12 +2,45 @@
 <html lang="en" dir="ltr">
 
 <head>
-    <link rel="stylesheet" href="https://unpkg.com/7.css">
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://unpkg.com/json2url/dist/index.umd.js"></script>
     <style>
+        input[type=email],
+        input[type=number],
+        input[type=password],
+        input[type=text] {
+            height: 23px;
+            transition: none;
+            border-width: 1px;
+            margin: 0;
+        }
+
+        input[type=email],
+        input[type=number],
+        input[type=password],
+        input[type=text],
+        textarea {
+            font: 9pt Segoe UI, sans-serif;
+            padding: 3px 4px 5px;
+            border: 1px solid #d8d8d8;
+            border-radius: 2px;
+            background-color: #fff;
+            box-sizing: border-box
+        }
+
+        input[type=email]:focus,
+        input[type=number]:focus,
+        input[type=password]:focus,
+        input[type=text]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #86c6e8 #b3e0f9 #b3e0f9;
+            border-width: 1px;
+
+        }
+
         button {
             min-width: 0 !important;
             min-height: 0 !important;
@@ -17,7 +50,12 @@
             height: 40px;
             font-size: 20px;
             flex-grow: 400;
-            flex-shrink: 400;
+            flex-shrink: 4000;
+            padding-left: 40px;
+            position: relative;
+            left: -35px;
+            z-index: 0;
+            padding-right: 80px;
         }
 
         button {
@@ -27,8 +65,10 @@
         button#backbtn {
             border-radius: 50%;
             transform: scale(1.3);
-            border-color: #72a2c5;
-            background: linear-gradient(180deg, #e5f4fd 45%, #b3e0f9 0);
+            background-color: #0284c3;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #d8d8d8;
             width: 40px;
             height: 40px;
             margin-left: 7px;
@@ -36,17 +76,93 @@
 
         button#fave {
             margin-right: 7px;
-            margin-left: 7px;
+            margin-left: -3px;
+            background-color: transparent !important;
+            border: none !important;
+        }
+
+        button#refresh {
+            background-color: transparent !important;
+            border: none !important;
+        }
+
+        button#refresh {
+            position: relative;
+            left: -45px;
+            width: 25px;
+            margin-left: -95px;
+
+        }
+
+        button#refresh svg path {
+            fill: #7e7e7e;
+            stroke: none;
+        }
+
+        button#home {
+            background-color: transparent !important;
+            border: none !important;
+        }
+
+        svg#search {
+            position: relative;
+            left: -70px;
+            top: -5px;
+            width: 25px;
+            fill: #7e7e7e;
+        }
+
+        button svg path {
+            fill: #fff;
+            stroke: #d8d8d8;
+            stroke-width: 20px;
+            stroke-linejoin: round;
+        }
+
+        button#home svg path {
+            fill: transparent;
+            stroke: #d8d8d8;
+            stroke-width: 25px;
+            stroke-linejoin: round;
+        }
+
+        button#fave[smartdisplay-browser-faved=false] circle,
+        button#fave[smartdisplay-browser-faved=false] path {
+            stroke: #d8d8d8;
+            fill: transparent;
+        }
+
+        button#fave[smartdisplay-browser-faved=false] path {
+            fill: #d8d8d8;
+        }
+
+        button#fave[smartdisplay-browser-faved=false] ellipse {
+            fill: #d8d8d8;
+        }
+
+        button#fave svg circle {
+            fill: #fffb00;
+            stroke: black;
+        }
+
+        button#fave svg path {
+            fill: #000000;
+            stroke: black;
         }
 
         button#forward,
         button#refresh,
         button#fave,
-        button#home {
+        button#home,
+        #backbtn {
             border-radius: 50%;
-            background-color: #cacaca;
+            background-color: #ffffff;
             width: 40px;
             height: 40px;
+            color: #d8d8d8;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #d8d8d8;
         }
 
         button#forward {
@@ -61,7 +177,7 @@
             height: 50px;
             z-index: 1;
             padding-top: 10px;
-            background-color: #f5f5f5;
+            background-color: #ffffff;
             display: flex;
         }
 
@@ -80,6 +196,10 @@
             vertical-align: middle;
             border-radius: 50%;
             transform: scale(0.8);
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            right: -5px;
         }
     </style>
 </head>
@@ -89,36 +209,63 @@
         <button id="backbtn">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                <path
+                <path fill="currentColor"
                     d="M447.1 256C447.1 273.7 433.7 288 416 288H109.3l105.4 105.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448s-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L109.3 224H416C433.7 224 447.1 238.3 447.1 256z" />
             </svg></button>
         <button id="forward">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                <path
+                <path fill="currentColor"
                     d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z" />
             </svg></button>
+
+        <img onerror='this.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path fill="currentColor" d="M352 256C352 278.2 350.8 299.6 348.7 320H163.3C161.2 299.6 159.1 278.2 159.1 256C159.1 233.8 161.2 212.4 163.3 192H348.7C350.8 212.4 352 233.8 352 256zM503.9 192C509.2 212.5 512 233.9 512 256C512 278.1 509.2 299.5 503.9 320H380.8C382.9 299.4 384 277.1 384 256C384 234 382.9 212.6 380.8 192H503.9zM493.4 160H376.7C366.7 96.14 346.9 42.62 321.4 8.442C399.8 29.09 463.4 85.94 493.4 160zM344.3 160H167.7C173.8 123.6 183.2 91.38 194.7 65.35C205.2 41.74 216.9 24.61 228.2 13.81C239.4 3.178 248.7 0 256 0C263.3 0 272.6 3.178 283.8 13.81C295.1 24.61 306.8 41.74 317.3 65.35C328.8 91.38 338.2 123.6 344.3 160H344.3zM18.61 160C48.59 85.94 112.2 29.09 190.6 8.442C165.1 42.62 145.3 96.14 135.3 160H18.61zM131.2 192C129.1 212.6 127.1 234 127.1 256C127.1 277.1 129.1 299.4 131.2 320H8.065C2.8 299.5 0 278.1 0 256C0 233.9 2.8 212.5 8.065 192H131.2zM194.7 446.6C183.2 420.6 173.8 388.4 167.7 352H344.3C338.2 388.4 328.8 420.6 317.3 446.6C306.8 470.3 295.1 487.4 283.8 498.2C272.6 508.8 263.3 512 255.1 512C248.7 512 239.4 508.8 228.2 498.2C216.9 487.4 205.2 470.3 194.7 446.6H194.7zM190.6 503.6C112.2 482.9 48.59 426.1 18.61 352H135.3C145.3 415.9 165.1 469.4 190.6 503.6V503.6zM321.4 503.6C346.9 469.4 366.7 415.9 376.7 352H493.4C463.4 426.1 399.8 482.9 321.4 503.6V503.6z"/></svg>`;'
+            id="favicon">
+        <input placeholder="Query the internet or type a URI..." onClick="this.select();" type="text" id="url">
+        <svg xmlns="http://www.w3.org/2000/svg" onclick="updateURL({keyCode: 13});" id="search" viewBox="0 0 512 512">
+            <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+            <path
+                d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z" />
+        </svg>
         <button id="refresh">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                <path
+                <path fill="currentColor"
                     d="M496 48V192c0 17.69-14.31 32-32 32H320c-17.69 0-32-14.31-32-32s14.31-32 32-32h63.39c-29.97-39.7-77.25-63.78-127.6-63.78C167.7 96.22 96 167.9 96 256s71.69 159.8 159.8 159.8c34.88 0 68.03-11.03 95.88-31.94c14.22-10.53 34.22-7.75 44.81 6.375c10.59 14.16 7.75 34.22-6.375 44.81c-39.03 29.28-85.36 44.86-134.2 44.86C132.5 479.9 32 379.4 32 256s100.5-223.9 223.9-223.9c69.15 0 134 32.47 176.1 86.12V48c0-17.69 14.31-32 32-32S496 30.31 496 48z" />
             </svg></button>
         <button id="home">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
                 <path
-                    d="M575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6H511.8L512.5 447.7C512.5 450.5 512.3 453.1 512 455.8V472C512 494.1 494.1 512 472 512H456C454.9 512 453.8 511.1 452.7 511.9C451.3 511.1 449.9 512 448.5 512H392C369.9 512 352 494.1 352 472V384C352 366.3 337.7 352 320 352H256C238.3 352 224 366.3 224 384V472C224 494.1 206.1 512 184 512H128.1C126.6 512 125.1 511.9 123.6 511.8C122.4 511.9 121.2 512 120 512H104C81.91 512 64 494.1 64 472V360C64 359.1 64.03 358.1 64.09 357.2V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5L575.8 255.5z" />
-            </svg></button>
-        <img onerror='this.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M352 256C352 278.2 350.8 299.6 348.7 320H163.3C161.2 299.6 159.1 278.2 159.1 256C159.1 233.8 161.2 212.4 163.3 192H348.7C350.8 212.4 352 233.8 352 256zM503.9 192C509.2 212.5 512 233.9 512 256C512 278.1 509.2 299.5 503.9 320H380.8C382.9 299.4 384 277.1 384 256C384 234 382.9 212.6 380.8 192H503.9zM493.4 160H376.7C366.7 96.14 346.9 42.62 321.4 8.442C399.8 29.09 463.4 85.94 493.4 160zM344.3 160H167.7C173.8 123.6 183.2 91.38 194.7 65.35C205.2 41.74 216.9 24.61 228.2 13.81C239.4 3.178 248.7 0 256 0C263.3 0 272.6 3.178 283.8 13.81C295.1 24.61 306.8 41.74 317.3 65.35C328.8 91.38 338.2 123.6 344.3 160H344.3zM18.61 160C48.59 85.94 112.2 29.09 190.6 8.442C165.1 42.62 145.3 96.14 135.3 160H18.61zM131.2 192C129.1 212.6 127.1 234 127.1 256C127.1 277.1 129.1 299.4 131.2 320H8.065C2.8 299.5 0 278.1 0 256C0 233.9 2.8 212.5 8.065 192H131.2zM194.7 446.6C183.2 420.6 173.8 388.4 167.7 352H344.3C338.2 388.4 328.8 420.6 317.3 446.6C306.8 470.3 295.1 487.4 283.8 498.2C272.6 508.8 263.3 512 255.1 512C248.7 512 239.4 508.8 228.2 498.2C216.9 487.4 205.2 470.3 194.7 446.6H194.7zM190.6 503.6C112.2 482.9 48.59 426.1 18.61 352H135.3C145.3 415.9 165.1 469.4 190.6 503.6V503.6zM321.4 503.6C346.9 469.4 366.7 415.9 376.7 352H493.4C463.4 426.1 399.8 482.9 321.4 503.6V503.6z"/></svg>`;'
-            id="favicon">
-        <input onClick="this.select();" type="text" id="url">
-        <button id="fave">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                <path
-                    d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z" />
-            </svg></button>
+                    d="M511.8 287.6L512.5 447.7C512.5 450.5 512.3 453.1 512 455.8V472C512 494.1 494.1 512 472 512H456C454.9 512 453.8 511.1 452.7 511.9C451.3 511.1 449.9 512 448.5 512H392C369.9 512 352 494.1 352 472V384C352 366.3 337.7 352 320 352H256C238.3 352 224 366.3 224 384V472C224 494.1 206.1 512 184 512H128.1C126.6 512 125.1 511.9 123.6 511.8C122.4 511.9 121.2 512 120 512H104C81.91 512 64 494.1 64 472V360C64 359.1 64.03 358.1 64.09 357.2V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L416 100.7V64C416 46.33 430.3 32 448 32H480C497.7 32 512 46.33 512 64V185L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6L511.8 287.6z" />
+            </svg></button><button id="fave">
+            <svg data-name="Layer 1" id="Layer_1" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <style>
+                        .cls-1,
+                        .cls-2 {
+                            fill: none;
+                            stroke: #231f20;
+                            stroke-miterlimit: 10;
+                            stroke-width: 2px;
+                        }
+
+                        .cls-2 {
+                            stroke-linecap: round;
+                        }
+
+                        .cls-3 {
+                            fill: #231f20;
+                        }
+                    </style>
+                </defs>
+                <title />
+                <circle class="cls-1" cx="24" cy="24" r="23" />
+                <path class="cls-2" d="M14,33s8.83,9.33,20,0" />
+                <ellipse class="cls-3" cx="17" cy="19" rx="3" ry="4" />
+                <ellipse class="cls-3" cx="31" cy="19" rx="3" ry="4" />
+            </svg>
+        </button>
     </div>
     <webview id="view" src="about:blank"
         useragent="Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36 SmartDisplayPi">
@@ -140,18 +287,6 @@
             view = ById('view'),
             defaultBookmarks = [
                 {
-                    "id": "436176fe-381a-42c5-bf23-44426ddbe263",
-                    "url": "https://www.google.com/",
-                    "icon": "https://www.google.com/s2/favicons?sz=64&domain_url=https://www.google.com/",
-                    "title": "Google"
-                },
-                {
-                    "id": "cf745aed-f50c-441d-b9f6-88cb69081df4",
-                    "url": "https://www.bing.com/?toWww=1&redig=A86BD904A6054C97B8ED879AC26F41BB",
-                    "icon": "https://www.google.com/s2/favicons?sz=64&domain_url=https://www.bing.com/?toWww=1&redig=A86BD904A6054C97B8ED879AC26F41BB",
-                    "title": "Bing"
-                },
-                {
                     "id": "06934346-c4e5-41ce-86d5-221e1eb07eea",
                     "url": "https://www.nytimes.com/",
                     "icon": "https://www.google.com/s2/favicons?sz=64&domain_url=https://www.nytimes.com/",
@@ -162,6 +297,12 @@
                     "url": "https://www.bbc.com/",
                     "icon": "https://www.google.com/s2/favicons?sz=64&domain_url=https://www.bbc.com/",
                     "title": "BBC - Homepage"
+                },
+                {
+                    "id": "2ad3d74f-bd46-458a-84db-670982c19503",
+                    "url": "https://www.uticaod.com/",
+                    "icon": "https://www.google.com/s2/favicons?sz=64&domain_url=https://www.uticaod.com/",
+                    "title": "Utica Observer Dispatch: Local News, Politics &amp; Sports in Utica, NY"
                 }
             ];
         function reloadView() {
@@ -179,7 +320,7 @@
             var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
                 '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
                 '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-                '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+                '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path fill="currentColor"
                 '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
                 '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
             if (!!pattern.test(str)) {
@@ -190,6 +331,7 @@
         }
         function updateURL(event) {
             if (event.keyCode === 13) {
+                BetterBoard.closeKeyboard();
                 omni.blur();
                 let val = omni.value;
                 if (val === "") {
@@ -234,7 +376,6 @@
                 tmp.push(bookmark);
                 settings.set("Browser.bookmarks", tmp);
                 fave.setAttribute("smartdisplay-browser-faved", bookmark.id);
-                fave.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z"/></svg>`;
             }
             else {
                 let tmp = settings.get("Browser.bookmarks", defaultBookmarks);
@@ -243,47 +384,53 @@
                 tmp.splice(index, 1);
                 settings.set("Browser.bookmarks", tmp);
                 fave.setAttribute("smartdisplay-browser-faved", false);
-                fave.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                <path
-                    d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z" />
-            </svg>`;
             }
         }
 
         function updateNav(event) {
             if (view.getURL().includes("https://www.google.com/search?q=")) {
-                omni.value = "Google Search: " + decodeURI(new URLSearchParams(view.getURL().split("https://www.google.com/search")[1]).get('q'));
+                omni.value = "Google Search | " + decodeURI(new URLSearchParams(view.getURL().split("https://www.google.com/search")[1]).get('q'));
             } else if (view.getURL().includes("browserHome.html")) {
                 omni.value = "";
             }
             else if (view.getURL().includes("https://www.bing.com/search?q=")) {
-                omni.value = "Bing Search: " + decodeURI(new URLSearchParams(view.getURL().split("https://www.bing.com/search")[1]).get('q'));
+                omni.value = "Bing Search | " + decodeURI(new URLSearchParams(view.getURL().split("https://www.bing.com/search")[1]).get('q'));
             } else {
                 omni.value = view.getURL();
             }
             let index = settings.get("Browser.bookmarks", defaultBookmarks).findIndex(x => x.url === view.getURL());
             if (index !== -1) {
                 fave.setAttribute("smartdisplay-browser-faved", settings.get("Browser.bookmarks", defaultBookmarks)[index].id);
-                fave.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M381.2 150.3L524.9 171.5C536.8 173.2 546.8 181.6 550.6 193.1C554.4 204.7 551.3 217.3 542.7 225.9L438.5 328.1L463.1 474.7C465.1 486.7 460.2 498.9 450.2 506C440.3 513.1 427.2 514 416.5 508.3L288.1 439.8L159.8 508.3C149 514 135.9 513.1 126 506C116.1 498.9 111.1 486.7 113.2 474.7L137.8 328.1L33.58 225.9C24.97 217.3 21.91 204.7 25.69 193.1C29.46 181.6 39.43 173.2 51.42 171.5L195 150.3L259.4 17.97C264.7 6.954 275.9-.0391 288.1-.0391C300.4-.0391 311.6 6.954 316.9 17.97L381.2 150.3z"/></svg>`;
             } else {
                 fave.setAttribute("smartdisplay-browser-faved", false);
-                fave.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                <path
-                    d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z" />
-            </svg>`;
             }
             if (view.canGoBack()) {
                 back.disabled = false;
                 back.style.transform = 'scale(1.3)';
-                back.style.background = "linear-gradient(180deg, #e5f4fd 45%, #b3e0f9 0)";
-                back.style.borderColor = "#72a2c5";
+                back.style.backgroundColor = "#0284c3";
+                back.style.borderColor = "#73a9c5";
+                back.style.color = "#fff";
+                back.children[0].children[0].style.stroke = "#fff";
+
             } else {
                 back.disabled = true;
-                back.style.transform = 'scale(1)';
-                back.style.background = "linear-gradient(180deg, #eee 45%, #ddd 0, #bbb)";
-                back.style.borderColor = "#888";
+                back.style.backgroundColor = "#fff";
+                back.style.borderColor = "#d8d8d8";
+                back.style.color = "#d8d8d8";
+                back.children[0].children[0].style.stroke = "#d8d8d8";
+            }
+            if (view.canGoForward()) {
+                forward.disabled = false;
+                forward.style.backgroundColor = "#0284c3";
+                forward.style.borderColor = "#73a9c5";
+                forward.style.color = "#fff";
+                forward.children[0].children[0].style.stroke = "#fff";
+            } else {
+                forward.disabled = true;
+                forward.style.backgroundColor = "#fff";
+                forward.style.borderColor = "#d8d8d8";
+                forward.style.color = "#d8d8d8";
+                forward.children[0].children[0].style.stroke = "#d8d8d8";
             }
             if (view.canGoForward()) {
                 forward.disabled = false;
@@ -314,24 +461,95 @@
         home.addEventListener("click", function () {
             view.loadURL('file:///' + __dirname + '/browserHome.html?' + encodeURI(json2Url.serialize(settings.get("Browser.bookmarks", defaultBookmarks))));
         });
+        window.addEventListener("beforeunload", function (e) {
+            settings.set("Browser.lastState", { url: view.getURL() });
+        }, false);
         var first = 0;
         function domReady() {
             console.log("ran");
             if (first === 0) {
-                view.loadURL('file:///' + __dirname + '/browserHome.html?' + encodeURI(json2Url.serialize(settings.get("Browser.bookmarks", defaultBookmarks))));
-                first = 1;
-                return;
+                if (settings.get("Browser.lastState", null) === null) {
+                    view.loadURL('file:///' + __dirname + '/browserHome.html?' + encodeURI(json2Url.serialize(settings.get("Browser.bookmarks", defaultBookmarks))));
+                    first = 1;
+                    return;
+                }
+                else {
+                    view.loadURL(settings.get("Browser.lastState").url);
+                    first = 1;
+                    return;
+                }
             }
             if (first === 1) {
                 view.clearHistory();
                 back.disabled = true;
-                back.style.transform = 'scale(1)';
-                back.style.background = "linear-gradient(180deg, #eee 45%, #ddd 0, #bbb)";
-                back.style.borderColor = "#888";
+                back.style.background = "#fff";
+                back.style.borderColor = "#d8d8d8";
+                back.style.color = "#d8d8d8";
+                back.children[0].children[0].style.stroke = "#d8d8d8";
                 view.removeEventListener("dom-ready", domReady);
             }
+
         }
         view.addEventListener("dom-ready", domReady);
+        view.addEventListener("did-stop-loading", () => {
+            view.executeJavaScript(`
+            if(typeof BETTERBOARDINJECTIONscript === 'undefined') {
+    var BETTERBOARDINJECTIONscript = document.createElement('script');
+    BETTERBOARDINJECTIONscript.src = 'https://cdn.jsdelivr.net/npm/betterboard/dist/betterboard1.0.0-beta.03-aio.min.js';
+    document.body.appendChild(BETTERBOARDINJECTIONscript);
+    BETTERBOARDINJECTIONscript.onload = () => {
+BetterBoard.init({
+    keysArrayOfObjects: [
+        {
+            "0": "Q",
+            "1": "W",
+            "2": "E",
+            "3": "R",
+            "4": "T",
+            "5": "Y",
+            "6": "U",
+            "7": "I",
+            "8": "O",
+            "9": "P",
+            "10": "+"
+        },
+        {
+            "0": "A",
+            "1": "S",
+            "2": "D",
+            "3": "F",
+            "4": "G",
+            "5": "H",
+            "6": "J",
+            "7": "K",
+            "8": "L",
+            "9": ";"
+        },
+        {
+            "0": "Z",
+            "1": "X",
+            "2": "C",
+            "3": "V",
+            "4": "B",
+            "5": "N",
+            "6": "M",
+            "7": ",",
+            "8": "."
+        }
+    ],
+    language: 'en',
+    theme: 'flat',
+    allowRealKeyboard: true,
+    allowMobileKeyboard: true,
+    autoScroll: true,
+    capsLockActive: false,
+});
+BetterBoard.run('input[type=text], input[type=number], input[type=password], input[type=search], textarea, input[type=email], input[type=month], input[type=time]'); 
+};
+}`);
+            console.log("injected");
+
+        });
     </script>
     <div id="homebutton" onclick="closeopen()">
         <div id="homesquare"></div>

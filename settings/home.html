@@ -56,33 +56,6 @@
             text-decoration: none;
             cursor: pointer;
         }
-
-        input[type=text] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            box-sizing: border-box;
-            border: 3px solid #ccc;
-            -webkit-transition: 0.5s;
-            transition: 0.5s;
-            outline: none;
-        }
-
-        input[type=submit] {
-            padding: 12px 20px;
-            margin: 8px 0;
-            box-sizing: border-box;
-            border: 3px solid #ccc;
-            background-color: white;
-            -webkit-transition: 0.5s;
-            transition: 0.5s;
-            outline: none;
-        }
-
-        input[type=text]:focus,
-        input[type=submit]:hover {
-            border: 3px solid #555;
-        }
     </style>
 </head>
 
@@ -95,15 +68,12 @@
         <div class="modal-content">
             <span class="close">&times;</span><br>
             <form onsubmit="createWidget();">
-                Name: <input oninput="updatePreview('name');" required id="name2" type="text"><br>
-                URL (Including Protocol): <input oninput="updatePreview('url');" id="url" required type="text"><br>
-                Preview:
-                <div id="preview" class="widget">
-                    <h3></h3>
-                    <webview
-                        useragent="Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36 SmartDisplayPi">
-                    </webview>
-                </div>
+                Name: <input data-kioskboard-type="keyboard" required id="name2" type="text"><br>
+                URL: <select id="protocol">
+                    <option value="http://">http</option>
+                    <option value="https://">https</option>
+                    <option value="http://">IDK</option>
+                </select> :// <input data-kioskboard-specialcharacters="true" id="url" required type="text"><br>
                 <input type="submit" value="Done">
 
             </form>
@@ -141,15 +111,14 @@
         for="autoload">Autoload widgets on startup (highly
         unrecommended)</label>
     <p>Widget width:
-        30px <input id="width" oninput="changeSize()" type="range" min="30" max="500"> 500px</p>
+        30px <input id="width" class="range-slider__range" oninput="changeSize()" type="range" min="30" max="500"> 500px
+    </p>
     <p>Widget height:
         30px <input id="height" oninput="changeSize()" type="range" min="30" max="500"> 500px</p>
     <div style="background-color: black; color: white;" id="example">Widgets look like this</div>
     <script>
         document.getElementById("width").value = settings.get("widgetWidth", 200);
         document.getElementById("height").value = settings.get("widgetHeight", 200);
-        document.getElementById("preview").style.width = settings.get("widgetWidth", 200) + "px";
-        document.getElementById("preview").style.height = settings.get("widgetHeight", 200) + "px";
         document.getElementById("autoload").checked = settings.get("autoloadWidgets", false);
         function changeSize() {
             document.getElementById("example").style.width = document.getElementById("width").value + "px";
@@ -220,19 +189,59 @@
             }
             widgets.push(
                 {
-                    name: document.getElementById("name2").value, url: document.getElementById("url").value
+                    name: document.getElementById("name2").value, url: document.getElementById("protocol").value + document.getElementById("url").value
                 });
             settings.set("widgets", widgets);
             settings.delete("dragPositions");
         }
-        function updatePreview(part) {
-            if (part == "name") {
-                document.getElementById("preview").getElementsByTagName("h3")[0].innerHTML = document.getElementById("name2").value;
-            }
-            else if (part == "url") {
-                document.getElementById("preview").getElementsByTagName("webview")[0].src = "../notloaded.html?url=" + document.getElementById("url").value;
-            }
-        }
+        const KioskBoard = require('kioskboard');
+        KioskBoard.init({
+            keysArrayOfObjects: [
+                {
+                    "0": "Q",
+                    "1": "W",
+                    "2": "E",
+                    "3": "R",
+                    "4": "T",
+                    "5": "Y",
+                    "6": "U",
+                    "7": "I",
+                    "8": "O",
+                    "9": "P",
+                    "10": "+"
+                },
+                {
+                    "0": "A",
+                    "1": "S",
+                    "2": "D",
+                    "3": "F",
+                    "4": "G",
+                    "5": "H",
+                    "6": "J",
+                    "7": "K",
+                    "8": "L",
+                    "9": ";"
+                },
+                {
+                    "0": "Z",
+                    "1": "X",
+                    "2": "C",
+                    "3": "V",
+                    "4": "B",
+                    "5": "N",
+                    "6": "M",
+                    "7": ",",
+                    "8": "."
+                }
+            ],
+            language: 'en',
+            theme: 'flat',
+            allowRealKeyboard: true,
+            allowMobileKeyboard: true,
+            autoScroll: true,
+            capsLockActive: false,
+        });
+        KioskBoard.run('input[type=text], input[type=number], textarea');
     </script>
     </div>
 </body>

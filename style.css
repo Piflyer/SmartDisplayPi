@@ -1,8 +1,186 @@
-::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-  /* make scrollbar transparent */
+input[type=range] {
+  -webkit-appearance: none;
+  width: calc(100% - (73px));
+  height: 10px;
+  border-radius: 5px;
+  background: #d7dcdf;
+  outline: none;
+  padding: 0;
+  margin: 0;
 }
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #2c3e50;
+  cursor: pointer;
+  -webkit-transition: background 0.15s ease-in-out;
+  transition: background 0.15s ease-in-out;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+  background: #1abc9c;
+}
+
+input[type=range]:active::-webkit-slider-thumb {
+  background: #1abc9c;
+}
+
+input[type=range]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: #2c3e50;
+  cursor: pointer;
+  -moz-transition: background 0.15s ease-in-out;
+  transition: background 0.15s ease-in-out;
+}
+
+input[type=range]::-moz-range-thumb:hover {
+  background: #1abc9c;
+}
+
+input[type=range]:active::-moz-range-thumb {
+  background: #1abc9c;
+}
+
+input[type=range]:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px #1abc9c;
+}
+
+::-moz-range-track {
+  background: #d7dcdf;
+  border: 0;
+}
+
+input::-moz-focus-inner,
+input::-moz-focus-outer {
+  border: 0;
+}
+
+input[type=submit], input[type=button], input[type=text], input[type=number], select {
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #d7dcdf;
+  background-color: white;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  border-radius: 5px;
+}
+
+input[type=text]:focus,
+input[type=submit]:hover,
+input[type=number]:focus,
+button:hover,
+input[type=button]:hover,
+select:focus {
+  border: 3px solid #2c3e50;
+}
+
+option {
+  background-color: #d7dcdf;
+}
+
+option:hover {
+  background-color: #2c3e50;
+}
+
+input[type=checkbox] {
+  appearance: none;
+  margin: 0;
+  font: inherit;
+  color: #2c3e50;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  display: grid;
+  place-content: center;
+}
+
+input[type=checkbox]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  background-color: #1abc9c;
+}
+
+input[type=checkbox]:checked::before {
+  transform: scale(1);
+}
+
+input[type=checkbox]:checked {
+  color: #1abc9c;
+}
+
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d7dcdf;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked+.slider {
+  background-color: #1abc9c;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #1abc9c;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
 
 * {
   font-family: 'Roboto', sans-serif;
@@ -64,7 +242,7 @@ webview {
 }
 
 #settingsMenuBar, #editingBar {
-  width: 100%;
+  width: calc(100vw - 20px);
   position: absolute;
   left: 0;
   top: 0;
@@ -81,9 +259,9 @@ webview {
 
 
 .widget {
-  background: #EFEFEF;
+  background: #d7dcdf;
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 35px;
+  border-radius: 25px;
   margin-bottom: 3.3333%;
 }
 
@@ -202,10 +380,8 @@ webview {
 #shortcuts a img {
   max-height: 90%;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.25);
   margin: 0;
 }
-
 
 i {
   border: solid white;
