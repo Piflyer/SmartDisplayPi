@@ -63,8 +63,7 @@
         if (q) {
           settings.set("devMode", true);
           console.log("Rebooting");
-          var exec = require('child_process').exec;
-          exec('sudo reboot', function (error, stdout, stderr) { callback(stdout); });
+          require('reboot').reboot();
         }
       }
     }

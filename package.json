@@ -73,6 +73,7 @@
     "proto-list": "^1.2.4",
     "pump": "^3.0.0",
     "readable-stream": "^2.3.7",
+    "reboot": "^0.1.0",
     "responselike": "^1.0.2",
     "roarr": "^2.15.4",
     "safe-buffer": "^5.1.2",
