@@ -1,3 +1,16 @@
+cd ~/
+echo "  ______                                       __      _______   __                      __                      _______   __ 
+ /      \                                     /  |    /       \ /  |                    /  |                    /       \ /  |
+/$$$$$$  | _____  ____    ______    ______   _$$ |_   $$$$$$$  |$$/   _______   ______  $$ |  ______   __    __ $$$$$$$  |$$/ 
+$$ \__$$/ /     \/    \  /      \  /      \ / $$   |  $$ |  $$ |/  | /       | /      \ $$ | /      \ /  |  /  |$$ |__$$ |/  |
+$$      \ $$$$$$ $$$$  | $$$$$$  |/$$$$$$  |$$$$$$/   $$ |  $$ |$$ |/$$$$$$$/ /$$$$$$  |$$ | $$$$$$  |$$ |  $$ |$$    $$/ $$ |
+ $$$$$$  |$$ | $$ | $$ | /    $$ |$$ |  $$/   $$ | __ $$ |  $$ |$$ |$$      \ $$ |  $$ |$$ | /    $$ |$$ |  $$ |$$$$$$$/  $$ |
+/  \__$$ |$$ | $$ | $$ |/$$$$$$$ |$$ |        $$ |/  |$$ |__$$ |$$ | $$$$$$  |$$ |__$$ |$$ |/$$$$$$$ |$$ \__$$ |$$ |      $$ |
+$$    $$/ $$ | $$ | $$ |$$    $$ |$$ |        $$  $$/ $$    $$/ $$ |/     $$/ $$    $$/ $$ |$$    $$ |$$    $$ |$$ |      $$ |
+ $$$$$$/  $$/  $$/  $$/  $$$$$$$/ $$/          $$$$/  $$$$$$$/  $$/ $$$$$$$/  $$$$$$$/  $$/  $$$$$$$/  $$$$$$$ |$$/       $$/ 
+                                                                              $$ |                    /  \__$$ |              
+                                                                              $$ |                    $$    $$/               
+                                                                              $$/                      $$$$$$/                "
 if [ $USER = "root" ]; then
     echo "You are root. Please run this script as a normal user with sudo powers."
     exit 1
@@ -20,6 +33,17 @@ if [ $continue1 = "y" ]; then
     echo "Continuing..."
 else
     exit 1
+fi
+sudo apt update && sudo apt upgrade -y
+if [ $? != 0 ]; then
+    echo "There was an error updating. Look above for more info."
+    echo -n "Would you like to continue anyway? (y/n): "
+    read continue7
+    if [ $continue7 = "y" ]; then
+        echo "Continuing anyway..."
+    else
+        exit 1
+    fi
 fi
 sudo apt-get install xserver-xorg-core --no-install-recommends --no-install-suggests -y
 if [ $? != 0 ]; then
@@ -77,5 +101,11 @@ if [ $? != 0 ]; then
         exit 1
     fi
 fi
+echo "[Desktop Entry]
+Name=SmartDisplatPi
+Exec=~/SmartDisplayPi/kiosk.sh
+Terminal=false
+Type=Application" | sudo tee /etc/xdg/autostart/smartdisplay.desktop
+sudo setcap CAP_SYS_BOOT=+ep /usr/bin/node
 echo "Rebooting..."
 sudo reboot
