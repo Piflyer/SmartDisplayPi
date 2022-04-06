@@ -54,7 +54,7 @@
                     const settings = new Store();
                     settings.set("devMode", true);
                     console.log("Rebooting");
-                    require('reboot').reboot();
+                    require('reboot').rebootImmediately();
                 }, 5100)
             }
             else {
