@@ -61,7 +61,7 @@
       document.getElementById("exitdev").onclick = () => {
         q = confirm("Are you sure you want to exit developer mode? (You will also reboot)");
         if (q) {
-          settings.set("devMode", true);
+          settings.set("devMode", false);
           console.log("Rebooting");
           require('reboot').reboot();
         }
