@@ -101,11 +101,12 @@ if [ $? != 0 ]; then
         exit 1
     fi
 fi
+mkdir ~/.config/autostart
 echo "[Desktop Entry]
-Name=SmartDisplatPi
-Exec=~/SmartDisplayPi/kiosk.sh
+Name=SmartDisplayPi
+Exec=bash -c 'cd ~/SmartDisplayPi && ./kiosk.sh'
 Terminal=false
-Type=Application" | sudo tee /etc/xdg/autostart/smartdisplay.desktop
+Type=Application" | sudo tee ~/.config/autostart/smartdisplay.desktop
 sudo setcap CAP_SYS_BOOT=+ep /usr/bin/node
 echo "Rebooting..."
 sudo reboot
