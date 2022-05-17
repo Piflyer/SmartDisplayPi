@@ -3,10 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href='../style.css' rel='stylesheet' />
     <title>Settings</title>
-    <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 </head>
 
 <body>
@@ -17,37 +15,29 @@
                     d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
             </svg> Misc. Settings</span></div>
     <br><br><br>
-    <script>
-        // For some reason, I need to define them here and not in the universal.js file.
-        const Store = require('electron-store');
-        const settings = new Store();
-    </script>
 
     <h1>
         Ambient
     </h1>
+    <div class="switchoption">
     <label for="ambient">Automatically go into Ambient Mode</label><br>
     <label class="switch">
         <input type="checkbox"
             oninput="settings.set('ambient', this.checked); if(!this.checked) {document.getElementById('ambientTime').disabled = true;} else {document.getElementById('ambientTime').disabled = false;}"
             id="ambient">
         <span class="slider"></span>
-    </label><br><br>
+    </label>
+    </div>  
     <label for="ambientTime">after</label>
-    <input min="1" max="10000000" type="number" oninput="settings.set('ambientDelay', this.value)" id="ambientTime">
+    <input required min="5" max="10000000" type="number" oninput="if(this.value !== '') { settings.set('ambientDelay', this.value) }" id="ambientTime">
     <label for="ambientTime">minutes of inactivity.</label>
 
     </div>
+    <script src="../scripts/universal.js"></script>
     <script>
         document.getElementById("ambientTime").value = settings.get('ambientDelay', 30);
         document.getElementById("ambient").checked = settings.get('ambient', true);
         if (!document.getElementById("ambient").checked) { document.getElementById('ambientTime').disabled = true; }
-        const $ = require("jquery");
-        $(function () {
-            "use strict";
-
-            jqKeyboard.init();
-        });
     </script>
 </body>
 

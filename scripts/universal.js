@@ -1,27 +1,27 @@
 const Store = require('electron-store');
 const settings = new Store();
-
+const root = require('electron-root-path').rootPath;
 const defaultApps = [{
     name: "Browser",
-    icon: "./media/Internet_Explorer.png",
-    href: "browser.html"
+    icon: "/media/Internet_Explorer.png",
+    href: "/browser.html"
 }, {
     name: "YouTube",
-    icon: "./media/youtube.png",
-    href: "webview.html?url=https://www.youtube.com/"
+    icon: "/media/youtube.png",
+    href: "/webview.html?url=https://www.youtube.com/"
 },
 {
     name: "Ambient",
-    icon: "./media/gclock.png",
-    href: "ambient.html"
+    icon: "/media/gclock.png",
+    href: "/ambient.html"
 }, {
     name: "OutLook",
-    icon: "./media/Microsoft_Office_Outlook_(2018–present).svg.png",
-    href: "webview.html?url=https://outlook.live.com/"
+    icon: "/media/Microsoft_Office_Outlook_(2018–present).svg.png",
+    href: "/webview.html?url=https://outlook.live.com/"
 }, {
     name: "Settings",
-    icon: "./media/settings.png",
-    href: "settings.html"
+    icon: "/media/settings.png",
+    href: "/settings.html"
 }];
 var shortcuts = document.createElement("DIV");
 shortcuts.classList.add("animate__animated", "animate__slideInUp");
@@ -68,9 +68,9 @@ function loadXHR(url, callback) {
 }
 settings.get("apps", defaultApps).forEach(app => {
     let shortcut = document.createElement("A");
-    shortcut.href = "file:///" + __dirname + "/" + app.href;
-    shortcut.innerHTML = `<img src="${app.icon}">`;
-    loadXHR(app.icon, function (result) {
+    shortcut.href = root + app.href;
+    shortcut.innerHTML = `<img src="${root + app.icon}">`;
+    loadXHR(root + app.icon, function (result) {
         shortcut.firstChild.style.borderRadius = (result.hasAlpha && app.icon !== "./media/gclock.png" ? "0" : "50%");
         console.log(result.depth + app.icon);
     });
@@ -99,13 +99,22 @@ function closeopen() {
         });
     }
 }
-document.getElementById("homebutton").addEventListener("dblclick", () => {
-    window.location = require('electron-root-path').rootPath + "/index.html";
+homebutton = document.createElement("DIV");
+homebutton.id = "homebutton";
+homesquare = document.createElement("DIV");
+homesquare.id = "homesquare"
+document.body.appendChild(homebutton);
+homebutton.appendChild(homesquare);
+homebutton.onclick = () => {
+    closeopen();
+}
+homebutton.addEventListener("dblclick", () => {
+   root + "/index.html";
 })
 function resize() {
     document.getElementById("shortcuts").firstChild.style.marginLeft = (document.getElementById("shortcuts").firstChild.offsetWidth + (0.015 * document.body.offsetWidth)) + "px";
-    document.getElementById("homebutton").style.height = document.getElementById("shortcuts").firstChild.offsetWidth + "px";
-    document.getElementById("homebutton").style.width = document.getElementById("shortcuts").firstChild.offsetWidth + "px";
+    homebutton.style.height = document.getElementById("shortcuts").firstChild.offsetWidth + "px";
+    homebutton.style.width = document.getElementById("shortcuts").firstChild.offsetWidth + "px";
 }
 resize();
 setTimeout(resize, 100);
@@ -114,7 +123,7 @@ window.addEventListener('resize', resize);
 // Back to your regularly scheduled programming.
 if (settings.get("ambient", true) && !window.location.href.includes("ambient.html")) {
     function ambient() {
-        window.location.href = "file:///" + __dirname + "/ambient.html";
+        window.location.href = root + "/ambient.html";
     }
     t = setTimeout(ambient, 10000);
     window.addEventListener('load', resetTimer, true);
@@ -129,6 +138,7 @@ if (settings.get("ambient", true) && !window.location.href.includes("ambient.htm
 }
 
 const BetterBoard = require('betterboard');
+const { link } = require('original-fs');
 BetterBoard.init({
     keysArrayOfObjects: [
         {

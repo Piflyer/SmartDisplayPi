@@ -4,7 +4,6 @@
 <head>
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link href='style.css' rel='stylesheet' />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
   <script>
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -84,12 +83,12 @@
     <div id="clock"></div>
     <div id="date"></div>
   </div>
-  <div onclick="window.location.href = 'index.html'" id="homebutton">
-    <div id="homesquare" onclick="closeopen()"></div>
-  </div>
   <script src="scripts/universal.js"></script>
   <script>
     closeopen();
+    homebutton.onclick = () => {
+      window.location.href = 'index.html';
+    }
   </script>
 </body>
 

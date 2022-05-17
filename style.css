@@ -1,3 +1,4 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
 input[type=range] {
   -webkit-appearance: none;
   width: calc(100% - (73px));
@@ -124,13 +125,20 @@ input[type=checkbox]:checked {
   color: #1abc9c;
 }
 
-
+.switchoption {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 8px;
+  display: flex;
+}
 /* The switch - the box around the slider */
 .switch {
   position: relative;
-  display: inline-block;
   width: 60px;
   height: 34px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin-left: auto;
+  order: 2;
 }
 
 /* Hide default HTML checkbox */
