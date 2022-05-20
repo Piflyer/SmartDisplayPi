@@ -1,13 +1,16 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
+body {
+  padding-bottom: calc(13vh + 5px);
+}
 input[type=range] {
   -webkit-appearance: none;
-  width: calc(100% - (73px));
   height: 10px;
   border-radius: 5px;
   background: #d7dcdf;
   outline: none;
   padding: 0;
-  margin: 0;
+  margin: 5px;
+  flex-grow: 100;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -51,6 +54,11 @@ input[type=range]:active::-moz-range-thumb {
 
 input[type=range]:focus::-webkit-slider-thumb {
   box-shadow: 0 0 0 3px #fff, 0 0 0 6px #1abc9c;
+}
+.range-slider__container {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 8px;
+  display: flex;
 }
 
 ::-moz-range-track {
@@ -129,6 +137,10 @@ input[type=checkbox]:checked {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 8px;
   display: flex;
+}
+.switchtext {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 /* The switch - the box around the slider */
 .switch {
@@ -250,13 +262,13 @@ webview {
 }
 
 #settingsMenuBar, #editingBar {
-  width: calc(100vw - 20px);
+  width: calc(100% - 20px);
   position: absolute;
   left: 0;
   top: 0;
   margin: 0;
-  color: white;
   padding: 10px;
+  color: white;
   z-index: 3;
 }
 

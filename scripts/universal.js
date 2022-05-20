@@ -24,7 +24,7 @@ const defaultApps = [{
     href: "/settings.html"
 }];
 var shortcuts = document.createElement("DIV");
-shortcuts.classList.add("animate__animated", "animate__slideInUp");
+shortcuts.classList.add("animate__animated");
 shortcuts.id = "shortcuts";
 document.body.appendChild(shortcuts);
 
@@ -71,7 +71,7 @@ settings.get("apps", defaultApps).forEach(app => {
     shortcut.href = root + app.href;
     shortcut.innerHTML = `<img src="${root + app.icon}">`;
     loadXHR(root + app.icon, function (result) {
-        shortcut.firstChild.style.borderRadius = (result.hasAlpha && app.icon !== "./media/gclock.png" ? "0" : "50%");
+        shortcut.firstChild.style.borderRadius = (result.hasAlpha ? "0" : "50%");
         console.log(result.depth + app.icon);
     });
     shortcuts.appendChild(shortcut);
@@ -88,14 +88,18 @@ function closeopen() {
         overlay.classList.replace('animate__slideOutDown', 'animate__slideInUp');
         overlay.addEventListener('animationend', () => {
             overlay.style.display = "block";
+            document.body.style.paddingBottom = "calc(13vh + 7px)";
+
         });
     } else {
         const closeStart = new Event('closeStart');
         document.dispatchEvent(closeStart);
         console.log("closing");
-        overlay.classList.replace("animate__slideInUp", 'animate__slideOutDown');
+        overlay.classList.remove("animate__slideInUp")
+        overlay.classList.add("animate__slideOutDown")
         overlay.addEventListener('animationend', () => {
             overlay.style.display = "none";
+            document.body.style.paddingBottom = "0";
         });
     }
 }
@@ -109,7 +113,7 @@ homebutton.onclick = () => {
     closeopen();
 }
 homebutton.addEventListener("dblclick", () => {
-   root + "/index.html";
+   window.location = root + "/index.html";
 })
 function resize() {
     document.getElementById("shortcuts").firstChild.style.marginLeft = (document.getElementById("shortcuts").firstChild.offsetWidth + (0.015 * document.body.offsetWidth)) + "px";

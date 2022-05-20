@@ -14,13 +14,13 @@
                 <path
                     d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
             </svg> Misc. Settings</span></div>
-    <br><br><br>
+    <br><br>
 
     <h1>
         Ambient
     </h1>
     <div class="switchoption">
-    <label for="ambient">Automatically go into Ambient Mode</label><br>
+    <label for="ambient" class="switchtext">Automatically go into Ambient Mode</label>
     <label class="switch">
         <input type="checkbox"
             oninput="settings.set('ambient', this.checked); if(!this.checked) {document.getElementById('ambientTime').disabled = true;} else {document.getElementById('ambientTime').disabled = false;}"

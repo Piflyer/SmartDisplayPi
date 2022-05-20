@@ -87,13 +87,7 @@
                 <path
                     d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
             </svg> Home Page Settings</span></div>
-    <br><br><br>
-    <script>
-        // For some reason, I need to define them here and not in the universal.js file.
-        const Store = require('electron-store');
-        const settings = new Store();
-    </script>
-
+    <br><br>
     <h1>
         Widgets
     </h1>
@@ -107,15 +101,22 @@
     </ul>
     <a href="#" onclick="settings.set(`editingHome`, true); window.location = '../index.html'">Edit widget
         locations</a><br><br>
-    <input type="checkbox" oninput="settings.set('autoloadWidgets', this.checked)" id="autoload"> <label
-        for="autoload">Autoload widgets on startup (highly
-        unrecommended)</label>
-    <p>Widget width:
-        30px <input id="width" class="range-slider__range" oninput="changeSize()" type="range" min="30" max="500"> 500px
-    </p>
-    <p>Widget height:
-        30px <input id="height" oninput="changeSize()" type="range" min="30" max="500"> 500px</p>
-    <div style="background-color: black; color: white;" id="example">Widgets look like this</div>
+    <div class="range-slider__container">
+        Widget width: 30px <input id="width" class="range-slider__range" oninput="changeSize()" type="range" min="30" max="500"> 500px
+    </div><br>
+    <div class="range-slider__container">
+        Widget height: 30px <input id="height" oninput="changeSize()" type="range" min="30" max="500"> 500px
+    </div>
+    <div class="widget" id="example"><h3>Widgets look like this</h3></div>
+    <div class="switchoption">
+        <label for="autoload" class="switchtext">Autoload widgets (unrecomended)</label>
+        <label class="switch">
+            <input type="checkbox"
+            oninput="settings.set('autoloadWidgets', this.checked)" id="autoload">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <script src="../scripts/universal.js"></script>
     <script>
         document.getElementById("width").value = settings.get("widgetWidth", 200);
         document.getElementById("height").value = settings.get("widgetHeight", 200);
@@ -194,54 +195,6 @@
             settings.set("widgets", widgets);
             settings.delete("dragPositions");
         }
-        const KioskBoard = require('kioskboard');
-        KioskBoard.init({
-            keysArrayOfObjects: [
-                {
-                    "0": "Q",
-                    "1": "W",
-                    "2": "E",
-                    "3": "R",
-                    "4": "T",
-                    "5": "Y",
-                    "6": "U",
-                    "7": "I",
-                    "8": "O",
-                    "9": "P",
-                    "10": "+"
-                },
-                {
-                    "0": "A",
-                    "1": "S",
-                    "2": "D",
-                    "3": "F",
-                    "4": "G",
-                    "5": "H",
-                    "6": "J",
-                    "7": "K",
-                    "8": "L",
-                    "9": ";"
-                },
-                {
-                    "0": "Z",
-                    "1": "X",
-                    "2": "C",
-                    "3": "V",
-                    "4": "B",
-                    "5": "N",
-                    "6": "M",
-                    "7": ",",
-                    "8": "."
-                }
-            ],
-            language: 'en',
-            theme: 'flat',
-            allowRealKeyboard: true,
-            allowMobileKeyboard: true,
-            autoScroll: true,
-            capsLockActive: false,
-        });
-        KioskBoard.run('input[type=text], input[type=number], textarea');
     </script>
     </div>
 </body>
