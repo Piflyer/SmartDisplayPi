@@ -7,7 +7,7 @@
     <link href='../style.css' rel='stylesheet' />
     <title>Settings</title>
     <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
     <style>
         /* The Modal (background) */
         .modal {
@@ -56,6 +56,10 @@
             text-decoration: none;
             cursor: pointer;
         }
+        #icons img {
+            width: 50px;
+            height: 50px;
+        }
     </style>
 </head>
 
@@ -67,17 +71,30 @@
     <!-- Modal content -->
     <div class="modal-content">
         <span class="close">&times;</span><br>
-        <form onsubmit="createWidget();">
+        <form onsubmit="createApp();">
             Name: <input data-kioskboard-type="keyboard" required id="name2" type="text"><br>
             URL: <select id="protocol">
             <option value="http://">http</option>
             <option value="https://">https</option>
             <option value="http://">IDK</option>
         </select> :// <input data-kioskboard-specialcharacters="true" id="url" required type="text"><br>
+            <input type="hidden" id="icon" value="/media/website.png">
+            Icon: <button type="button" onclick="openIconForm()"><img id="icon-preview" style="height: 100px; width: 100px" src="../media/website.png"></button><br>
             <input type="submit" value="Done">
-
         </form>
 
+    </div>
+
+</div>
+<!-- The Modal -->
+<div id="iconModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span><br>
+            <input type="text" oninput="search(this.value)" />
+            <div id="icons"></div>
+            <script src="../scripts/iconPicker.js"></script>
     </div>
 
 </div>
@@ -86,16 +103,10 @@
         class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
                 <path
                         d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
-            </svg> Home Page Settings</span></div>
+            </svg> Application Settings</span></div>
 <br><br>
 <h1>
-    Background
-</h1>
-<label for="background_delay">Change background image every: </label>
-<input required min="5" max="10000000" type="number" oninput="if(this.value !== '') { settings.set('background_refresh_rate', this.value * 1000) }" id="background_delay">
-<label for="background_delay">seconds.</label>
-<h1>
-    Widgets
+    Apps
 </h1>
 
 <ul id="ul">
@@ -105,37 +116,8 @@
                 d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
     </svg> New</li>
 </ul>
-<a href="#" onclick="settings.set(`editingHome`, true); window.location = '../index.html'">Edit widget
-    locations</a><br><br>
-<div class="range-slider__container">
-    Widget width: 30px <input id="width" class="range-slider__range" oninput="changeSize()" type="range" min="30" max="500"> 500px
-</div><br>
-<div class="range-slider__container">
-    Widget height: 30px <input id="height" oninput="changeSize()" type="range" min="30" max="500"> 500px
-</div>
-<div class="widget" id="example"><h3>Widgets look like this</h3></div>
-<div class="switchoption">
-    <label for="autoload" class="switchtext">Autoload widgets (unrecomended)</label>
-    <label class="switch">
-        <input type="checkbox"
-               oninput="settings.set('autoloadWidgets', this.checked)" id="autoload">
-        <span class="slider"></span>
-    </label>
-</div>
 <script src="../scripts/universal.js"></script>
 <script>
-    document.getElementById("background_delay").value = settings.get('background_refresh_rate', 10000) / 1000
-    document.getElementById("width").value = settings.get("widgetWidth", 200);
-    document.getElementById("height").value = settings.get("widgetHeight", 200);
-    document.getElementById("autoload").checked = settings.get("autoloadWidgets", false);
-    function changeSize() {
-        document.getElementById("example").style.width = document.getElementById("width").value + "px";
-        document.getElementById("example").style.height = document.getElementById("height").value + "px";
-        settings.set("widgetWidth", document.getElementById("width").value);
-        settings.set("widgetHeight", document.getElementById("height").value);
-
-    }
-    changeSize();
     function openForm() {
         // Get the modal
         var modal = document.getElementById("myModal");
@@ -157,53 +139,65 @@
             }
         }
     }
-    var widgets = settings.get("widgets", [
-        {
-            name: "Traffic",
-            url: "https://www.google.com/maps/"
-        },
-        {
-            name: "Weather",
-            url: "https://weather.com/weather/today/"
-        },
-        {
-            name: "Calendar",
-            url: "https://calendar.google.com/calendar/u/0/r/customday"
-        }]);
-    window.onload = () => {
-        widgets.forEach(widget => {
+    function openIconForm() {
+        // Get the modal
+        var modal = document.getElementById("iconModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[1];
+
+        modal.style.display = "block";
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+    var apps = settings.get("apps", defaultApps);
+    function refreshApps() {
+        document.getElementById("ul").innerHTML = `<li onclick="openForm()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                  class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+        <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+    </svg> New</li>`;
+        apps.forEach(app => {
             var li = document.createElement("li");
-            li.innerHTML = widget.name + ` <a onclick="deleteWidget('` + widget.name + `')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            li.innerHTML = app.name + ` <a onclick="deleteApp('` + app.name + `')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-x-circle-fill" viewBox="0 0 16 16">
                 <path
                     d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
-            </svg></a>`
+            </svg></a>`;
             document.getElementById("ul").appendChild(li);
         });
     }
-    function deleteWidget(name, url) {
-        // All of this was automatically generated by GitHub Copilot. Creepy. Worked first try without any editing.
-        widgets.splice(widgets.findIndex(item => item.name === name), 1);
-        settings.set("widgets", widgets);
-        window.location.reload();
-        settings.delete("dragPositions");
-
+    window.onload = () => {
+        refreshApps();
     }
-    function createWidget() {
-        // I'm gonna be out of a job soon.
-        if (widgets.findIndex(item => item.name === document.getElementById("name2").value) !== -1) {
-            alert("Widget with that name already exists! Please choose another name or delete the existing widget.");
+    function deleteApp(name) {
+        apps.splice(apps.findIndex(item => item.name === name), 1);
+        settings.set("apps", apps);
+        refreshApps();
+    }
+    function createApp() {
+        if (apps.findIndex(item => item.name === document.getElementById("name2").value) !== -1) {
+            alert("App with that name already exists! Please choose another name or delete the existing app.");
             return;
         }
-        widgets.push(
+        apps.push(
             {
-                name: document.getElementById("name2").value, url: document.getElementById("protocol").value + document.getElementById("url").value
+                name: document.getElementById("name2").value, href: "/webview.html?url=" + encodeURIComponent(document.getElementById("protocol").value + document.getElementById("url").value), icon: "https://www.google.com/s2/favicons?domain=" + document.getElementById("url").value
             });
-        settings.set("widgets", widgets);
-        settings.delete("dragPositions");
+        settings.set("apps", apps);
+        refreshApps();
     }
 </script>
-</div>
 </body>
 
 </html>

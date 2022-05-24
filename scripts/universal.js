@@ -3,7 +3,7 @@ const settings = new Store();
 const root = require('electron-root-path').rootPath;
 const defaultApps = [{
     name: "Browser",
-    icon: "/media/Internet_Explorer.png",
+    icon: "/media/ie.png",
     href: "/browser.html"
 }, {
     name: "YouTube",
@@ -12,11 +12,11 @@ const defaultApps = [{
 },
 {
     name: "Ambient",
-    icon: "/media/gclock.png",
+    icon: "/media/clock.png",
     href: "/ambient.html"
 }, {
     name: "OutLook",
-    icon: "/media/Microsoft_Office_Outlook_(2018–present).svg.png",
+    icon: "/media/outlook.png",
     href: "/webview.html?url=https://outlook.live.com/"
 }, {
     name: "Settings",

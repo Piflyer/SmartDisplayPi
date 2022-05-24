@@ -4,12 +4,12 @@
 <head>
     <link rel="stylesheet" href="https://unpkg.com/7.css">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
-  
     <script src="https://unpkg.com/json2url/dist/index.umd.js"></script>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
         #omni {
             margin-top: 10vh;
         }
@@ -25,8 +25,6 @@
             border-top-color: #888;
             border-radius: 2px;
         }
-
-        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
         h1 {
             margin: auto;
@@ -48,7 +46,7 @@
             display: flex;
             text-align: left;
             width: 70%;
-
+            margin: auto;
         }
 
         .autocomplete-result-list {
@@ -111,7 +109,7 @@
 <body style="margin: 0;">
     <form method="GET" action="https://google.com/search">
         <div id="omni">
-            <center>
+            <div style="text-align: center;">
                 <h1 id="title1">SmartDisplayPi</h1>
                 <p>Powered by Google</p>
                 <div id="aboveSearch"><button style="margin: 0;"
@@ -125,7 +123,7 @@
                 <button type="submit">Search</button><button type="button" onclick="feelingHellaLucky()">Feeling
                     Lucky,
                     Punk?</button>
-            </center>
+            </div>
             <div id="bookmarks">
 
             </div>
@@ -133,7 +131,7 @@
     </form>
     <script>
         const o = new MutationObserver(() => {
-            if (document.getElementById("url").getAttribute("aria-expanded") == "true") {
+            if (document.getElementById("url").getAttribute("aria-expanded") === "true") {
                 document.getElementById("aboveSearch").style.display = "block";
                 document.getElementById("title1").style.display = "none";
             } else {
@@ -147,7 +145,7 @@
         });
         function feelingHellaLucky() {
             var url
-            if ("" == document.getElementById("url").value) {
+            if ("" === document.getElementById("url").value) {
                 url = "https://www.google.com/search?q=google+doodles";
             }
             else {

@@ -2,6 +2,7 @@
 body {
   padding-bottom: calc(13vh + 5px);
 }
+
 input[type=range] {
   -webkit-appearance: none;
   height: 10px;
@@ -71,7 +72,7 @@ input::-moz-focus-outer {
   border: 0;
 }
 
-input[type=submit], input[type=button], input[type=text], input[type=number], select {
+input[type=submit], input[type=button], input[type=text], input[type=number], select, button:not(button#backbtn, button#fave, button#refresh,  button#home, button#forward) {
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
@@ -82,14 +83,19 @@ input[type=submit], input[type=button], input[type=text], input[type=number], se
   outline: none;
   border-radius: 5px;
 }
+input[type=submit].green, input[type=button].green, select.green {
+border-color: #1abc9c;
+color: #1abc9c;
+}
 
 input[type=text]:focus,
 input[type=submit]:hover,
 input[type=number]:focus,
 button:hover,
 input[type=button]:hover,
-select:focus {
+select:focus, button:not(button#backbtn, button#fave, button#refresh,  button#home, button#forward):hover {
   border: 3px solid #2c3e50;
+  color: #2c3e50;
 }
 
 option {
@@ -394,7 +400,7 @@ webview {
 }
 
 #shortcuts a {
-  margin-left: 5px;
+  margin-left: 12px;
 }
 
 #shortcuts a img {
@@ -452,7 +458,7 @@ i {
 .setting-menu img {
   float: left;
   height: 80%;
-  border-radius: 10px;
+  border-radius: 4px;
   margin: 10px;
 }
 

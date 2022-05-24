@@ -27,7 +27,7 @@ function updateBackground() {
                 nextImage = data;
                 preloadImages([nextImage]);
             });
-    }, 2000);
+    }, settings.get("background_refresh_rate", 10000));
 }
 window.onload = function () {
     widgets = settings.get("widgets", [

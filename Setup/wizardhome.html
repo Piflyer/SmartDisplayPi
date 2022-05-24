@@ -1,119 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>No Wifi :(</title>
-  </head>
-  <body>
-    <style media="screen">
-      @font-face {
-        font-family: 'Roboto';
-        font-style: normal;
-        src:
-        url('Roboto/Roboto-Regular.ttf')
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    const Store = require('electron-store');
+    const settings = new Store();
+  </script>
+  <style>
+    input#nextbutton {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 id="bar">Welcome to SmartDisplayPi! <input type="button" class="green" id="nextbutton"
+      onclick="checkConnection();" value="Next"></h1>
+  <div id="center">
+    <h2 class="words">To continue, please connect to the internet</h2>
+    <input type="button" class="green" id="connect" onclick="gnomeControlCentre();" value="Connect">
+
+  </div>
+  <script>
+    function gnomeControlCentre() {
+      if (settings.get("firstTimeOpeningExternalApp", true)) {
+        alert("Do not click minimize after this window is opened, it will disappear until reboot and will slow down your smartdisplay until then.");
+        settings.set("firstTimeOpeningExternalApp", false);
+        gnomeControlCentre();
+        return;
       }
-      body{
-        background: #1EAAF1;
+      var exec = require('child_process').exec;
+      exec('gnome-control-center wifi', function (error, stdout, stderr) { console.log(stdout); console.log(stderr); if (error) throw error; });
+      document.getElementById("nextbutton").style.display = "inline";
+      document.getElementById("connect").classList.remove("green");
+    }
+    function checkConnection() {
+      if (navigator.onLine) {
+        window.location = "setup1.html";
       }
-      #center {
-        position: absolute;
-        width: 646px;
-        height: 209px;
-        left: 77px;
-        top: 114px;
-        background: #FFFFFF;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-        border-radius: 2px;
+      else {
+        alert("You are not connected. Please connect to the internet");
+        gnomeControlCentre();
       }
-      #setupwizard {
-        position: absolute;
-        width: 266px;
-        height: 61px;
-        left: 77px;
-        top: 373px;
-        background: #FFFFFF;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-        border-radius: 2px;
-      }
-      #wifi {
-        position: absolute;
-        width: 266px;
-        height: 61px;
-        left: 457px;
-        top: 373px;
-        background: #FFFFFF;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-        border-radius: 2px;
-      }
-      h1 {
-        position: absolute;
-        width: 319px;
-        height: 41px;
-        left: 240px;
-        top: 137px;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 25px;
-        line-height: 29px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        color: #000000;
-      }
-      h2 {
-        position: absolute;
-        width: 503px;
-        height: 92px;
-        left: 148px;
-        top: 194px;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 23px;
-        text-align: center;
-        color: #000000;
-      }
-      h3 {
-        position: absolute;
-        width: 192px;
-        height: 38px;
-        left: 114px;
-        top: 367px;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 23px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        color: #000000;
-      }
-      h4 {
-        position: absolute;
-        width: 152px;
-        height: 38px;
-        left: 514px;
-        top: 362px;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 23px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        color: #000000;
-      }
-    </style>
-    <div id="center"></div>
-    <a id="setupwizard" href="setup1.html"></a>
-    <a id="wifi" href="wifi1.html"></a>
-    <h1>Welcome to SmartDisplayPi!</h1>
-    <h2>It seems like you don’t have internet connection. To start using SmartDisplayPi, you will need to setup this device or connect to the Internet. If this is your first time, hit “Launch Setup Wizard.”</h2>
-    <h3>Launch Setup Wizard</h3>
-    <h4>Connect to Wifi</h4>
-  </body>
+    }
+  </script>
+</body>
+
 </html>

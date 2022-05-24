@@ -7,6 +7,7 @@
   "version": "1.0.0",
   "main": "main.js",
   "dependencies": {
+    "@furcan/iconpicker": "^1.5.0",
     "betterboard": "^1.0.0-beta.1",
     "boolean": "^3.1.4",
     "buffer-crc32": "^0.2.13",
@@ -35,6 +36,7 @@
     "extract-zip": "^1.7.0",
     "fd-slicer": "^1.1.0",
     "fs-extra": "^8.1.0",
+    "fuzzysort": "^2.0.1",
     "get-size": "^3.0.0",
     "get-stream": "^4.1.0",
     "global-agent": "^3.0.0",
