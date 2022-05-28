@@ -79,7 +79,7 @@ window.onload = function () {
     });
 
     updateBackground();
-    setInterval(updateBackground, 30000);
+    setInterval(updateBackground, settings.get("background_refresh_rate", 10000));
     widgets = document.getElementsByClassName("widget");
     for (let i = 0; i < widgets.length; i++) {
         widgets[i].style.width = settings.get("widgetWidth", 200) + "px";

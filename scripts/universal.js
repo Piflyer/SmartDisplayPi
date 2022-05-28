@@ -28,52 +28,13 @@ shortcuts.classList.add("animate__animated");
 shortcuts.id = "shortcuts";
 document.body.appendChild(shortcuts);
 
-function check(buffer, callback) {
-    var view = new DataView(buffer);
-
-    // is a PNG?
-    if (view.getUint32(0) === 0x89504E47 && view.getUint32(4) === 0x0D0A1A0A) {
-        // We know format field exists in the IHDR chunk. The chunk exists at 
-        // offset 8 +8 bytes (size, name) +8 (depth) & +9 (type)
-        var depth = view.getUint8(8 + 8 + 8);
-        var type = view.getUint8(8 + 8 + 9);
-
-        callback({
-            depth: depth,
-            type: ["G", "", "RGB", "Indexed", "GA", "", "RGBA"][type],
-            buffer: view.buffer,
-            hasAlpha: type === 4 || type === 6  // grayscale + alpha or RGB + alpha
-        })
-    }
-    // Not a PNG
-    else {
-        callback({
-            depth: null,
-            type: "NOTPNG",
-            buffer: view.buffer,
-            hasAlpha: false
-        });
-    }
-}
-
-function loadXHR(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
-    xhr.responseType = "arraybuffer";
-    xhr.onload = function () {
-        if (xhr.status === 200) check(xhr.response, callback);
-        else consle.log("Loading error: " + xhr.statusText);
-    };
-    xhr.send();
-}
 settings.get("apps", defaultApps).forEach(app => {
     let shortcut = document.createElement("A");
     shortcut.href = root + app.href;
     shortcut.innerHTML = `<img src="${root + app.icon}">`;
-    loadXHR(root + app.icon, function (result) {
-        shortcut.firstChild.style.borderRadius = (result.hasAlpha ? "0" : "50%");
-        console.log(result.depth + app.icon);
-    });
+    if(app.icon.includes("/media/usr/")) {
+        shortcut.classList.add("usr");
+    }
     shortcuts.appendChild(shortcut);
 });
 var overlay = document.getElementById("shortcuts");

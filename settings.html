@@ -18,12 +18,6 @@
 
 <body>
   <a href="#" id="exitdev">Exit [DEV MODE]</a>
-  <div class="setting-menu" onclick="window.location = 'http://localhost:8123/config/dashboard'">
-    <img src="media/halogo.png">
-    <br>
-    <h1>Home Assistant</h1>
-    <p>Control and manage Home Assistant</p>
-  </div>
   <div class="setting-menu" onclick="gnomeControlCentre()">
     <img src="media/gnome-control-center.png">
     <br>
@@ -47,6 +41,13 @@
     <br>
     <h1>Misc.</h1>
     <p>Edit other settings</p>
+  </div>
+  <hr>
+  <div class="setting-menu" onclick="window.location = 'settings/about.html'">
+    <img src="media/about.png">
+    <br>
+    <h1>About</h1>
+    <p>About this instance of SmartDisplayPi</p>
   </div>
   <div class="setting-menu" onclick="window.location = 'Setup/wizardhome.html'">
     <img src="media/setup.png">

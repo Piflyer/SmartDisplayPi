@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-let icons = JSON.parse(fs.readFileSync('icons.json'));
+let icons = JSON.parse(fs.readFileSync('assets/icons.json'));
 const fuzzysort = require('fuzzysort');
 function search(query) {
     let results = fuzzysort.go(query, icons, {

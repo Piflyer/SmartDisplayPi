@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div id="settingsMenuBar"><span onclick="window.location = '../settings.html'"><i class="icon icon_bold icon_go-previous"></i> Settings</span></div><br><br>
+<p><b><u>SmartDisplayPi Version</u></b>: v0.0.1<b>[ALPHA]</b></p>
+  <p id="ubuntu-version"></p>
+  <p id="[DEVMODE]"></p>
+  <script src="../scripts/universal.js"></script>
+<script>
+  const exec = require('child_process').exec;
+
+  function execute(command, callback) {
+    exec(command, (error, stdout, stderr) => {
+      callback(stdout);
+    });
+    }
+      execute('uname -a', (output) => {
+          document.getElementById("ubuntu-version").innerHTML = "<b><u>Uname:</u></b> " + output;
+      });
+  if(settings.get('devMode') === true) {
+    document.getElementById("[DEVMODE]").innerHTML = "<b><u>[DEV MODE]:</u></b> Enabled";
+  } else {
+    document.getElementById("[DEVMODE]").innerHTML = "<b><u>[DEV MODE]:</u></b> Disabled";
+  }
+</script>
+</body>
+</html>
