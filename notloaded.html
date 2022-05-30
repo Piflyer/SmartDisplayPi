@@ -10,7 +10,7 @@
 </head>
 
 <body style="margin: 0; background-color: #EFEFEF;">
-    <center>
+    <div style="text-align: center;">
         <h1>Click to load</h1>
         <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor"
             class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
@@ -18,7 +18,7 @@
             <path
                 d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
         </svg>
-    </center>
+    </div>
     <script>
         document.body.onclick = () => {
             var url = decodeURI(new URLSearchParams(window.location.search).get('url'));

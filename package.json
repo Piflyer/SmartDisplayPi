@@ -14,6 +14,7 @@
     "buffer-from": "^1.1.2",
     "cacheable-request": "^6.1.0",
     "clone-response": "^1.0.2",
+    "compare-versions": "^4.1.3",
     "concat-stream": "^1.6.2",
     "config-chain": "^1.1.13",
     "core-util-is": "^1.0.3",

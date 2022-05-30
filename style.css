@@ -72,7 +72,10 @@ input::-moz-focus-inner,
 input::-moz-focus-outer {
   border: 0;
 }
-
+button:disabled, button.green:disabled {
+  border-color: #d7dcdf !important;
+  color: #d7dcdf !important;
+}
 input[type=submit], input[type=button], input[type=text], input[type=number], select, button:not(button#backbtn, button#fave, button#refresh,  button#home, button#forward) {
   padding: 12px 20px;
   margin: 8px 0;
@@ -88,6 +91,10 @@ input[type=submit].green, input[type=button].green, select.green {
 border-color: #1abc9c;
 color: #1abc9c;
 }
+button.green {
+  border-color: #1abc9c !important;
+  color: #1abc9c;
+}
 
 input[type=text]:focus,
 input[type=submit]:hover,
@@ -95,7 +102,7 @@ input[type=number]:focus,
 button:hover,
 input[type=button]:hover,
 select:focus, button:not(button#backbtn, button#fave, button#refresh,  button#home, button#forward):hover {
-  border: 3px solid #2c3e50;
+  border: 3px solid #2c3e50 !important;
   color: #2c3e50;
 }
 

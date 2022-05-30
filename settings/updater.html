@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .err {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+<h1>Welcome to the SmartDisplayPi Updater!!!</h1>
+<p id="update"></p>
+<button id="cancel" onclick="window.location = 'about.html'">Cancel</button> <button id="continue" class="green" onclick="update();">Continue</button>
+<p id="outputHeader" style="display: none">Output:</p>
+<pre style="color: white;display: none; background: black;font-family: auto;padding: 10px;max-height: 50vh;overflow-y: scroll;" id="output"></pre>
+<script>
+    const oldVersion = new URLSearchParams(window.location.search).get('old');
+    const updateSchedule = new URLSearchParams(window.location.search).get('schedule');
+    const root = require('electron-root-path').rootPath;
+    var myHistory = [];
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://api.github.com/repos/Sid220/SmartDisplayPi/releases/tags/" + updateSchedule, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            document.getElementById("update").innerHTML = "Updating from version " + oldVersion + " on channel " + updateSchedule + " to version " + JSON.parse(xhr.responseText).name.replace(".alpha", "").replace(".beta", "") + " on channel " + updateSchedule;
+        }
+    }
+    xhr.send();
+    const child_process = require('child_process');
+
+    let runCommand = ({command, onout, onerr, ondone}) => {
+        const proc = child_process.spawn(
+            command,
+            [],
+            {
+                shell: true,
+                stdio: ["ignore", "pipe", "pipe"],
+            },
+        )
+        proc.stdout.on("data", (data) => onout(data.toString()));
+        proc.stdout.on("data", (data) => document.getElementById("output").innerHTML += data.toString());
+        proc.stderr.on("data", (data) => onerr(data.toString()));
+        proc.stderr.on("data", (data) => document.getElementById("output").innerHTML += "<span class='err'>" + data.toString() + "</span>");
+        proc.on("close", (code) => ondone(code))
+    }
+
+    async function doUpdate(command) {
+        let entry = {command, stdout: "", stderr: "", error: null, running: true}
+        myHistory.push(entry);
+        myHistory = myHistory
+        let onout = (data) => {
+            entry.stdout += data
+            myHistory = myHistory
+            document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;
+        }
+        let onerr = (data) => {
+            entry.stderr += data
+            myHistory = myHistory
+            document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;
+        }
+        let ondone = (code) => {
+            entry.running = false
+            entry.error = (code !== 0)
+            myHistory = myHistory
+            document.getElementById("continue").onclick = () => window.location = "about.html";
+            document.getElementById("continue").disabled = false;
+            document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;
+        }
+        runCommand({command,onout,onerr,ondone});
+        console.log(myHistory);
+    }
+
+    function update() {
+        document.getElementById("cancel").style.display = "none";
+        document.getElementById("continue").disabled = true;
+        document.getElementById("outputHeader").style.display = "block";
+        document.getElementById("output").style.display = "block";
+        doUpdate('cd ' + root + ' && pkexec bash '+ root +'/update.sh');
+    }
+</script>
+</body>
+</html>

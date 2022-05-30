@@ -53,6 +53,10 @@ window.onload = function () {
                 webview.setAttribute("src", "notloaded.html?url=" + widget.url);
             }
         }
+        else {
+            webview.src = "about:blank";
+            webview.style.userSelect = "none";
+        }
         webview.setAttribute("useragent", "Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36 SmartDisplayPi");
 
         var div = document.createElement("div");
