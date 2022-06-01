@@ -21,16 +21,9 @@
 <script>
     const oldVersion = new URLSearchParams(window.location.search).get('old');
     const updateSchedule = new URLSearchParams(window.location.search).get('schedule');
+    const newVersion = new URLSearchParams(window.location.search).get('new');
     const root = require('electron-root-path').rootPath;
     var myHistory = [];
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://api.github.com/repos/Sid220/SmartDisplayPi/releases/tags/" + updateSchedule, true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            document.getElementById("update").innerHTML = "Updating from version " + oldVersion + " on channel " + updateSchedule + " to version " + JSON.parse(xhr.responseText).name.replace(".alpha", "").replace(".beta", "") + " on channel " + updateSchedule;
-        }
-    }
-    xhr.send();
     const child_process = require('child_process');
 
     let runCommand = ({command, onout, onerr, ondone}) => {
@@ -80,7 +73,7 @@
         document.getElementById("continue").disabled = true;
         document.getElementById("outputHeader").style.display = "block";
         document.getElementById("output").style.display = "block";
-        doUpdate('cd ' + root + ' && pkexec bash '+ root +'/update.sh');
+        doUpdate('cd ' + root + ' && bash '+ root +'/update.sh');
     }
 </script>
 </body>

@@ -29,20 +29,29 @@
     document.getElementById("[DEVMODE]").innerHTML = "<b><u>[DEV MODE]:</u></b> Disabled";
   }
   function getVersion() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://api.github.com/repos/Sid220/SmartDisplayPi/releases/tags/" + updateSchedule, true);
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4) {
-          const compare = require("compare-versions").compare;
-          const newVersion = compare(JSON.parse(xhr.responseText).name.replace(".alpha", "").replace(".beta", ""), currentVersion.replace(".alpha", "").replace(".beta", ""), ">");
-            if (newVersion) {
-                document.getElementById("version").innerHTML = currentVersion + "<br><b><u>New Version Available:</u></b> " + JSON.parse(xhr.responseText).name + " <a href='updater.html?old="+ currentVersion +"&schedule=" + updateSchedule +"'><button>Update</button></a>";
-            } else {
-                document.getElementById("version").innerHTML = currentVersion + "<br><b><u>Up to date!</u></b>";
-            }
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://api.github.com/repos/Sid220/SmartDisplayPi/releases", true);
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+              while(true) {
+                      const compare = require("compare-versions").compare;
+                      let index = 0;
+                      const testVersion = JSON.parse(xhr.responseText)[index].name;
+                      if (testVersion.includes(updateSchedule)) {
+                          const newVersion = compare(testVersion.replace(".alpha", "").replace(".beta", "").replace(".stable", ""), currentVersion.replace(".alpha", "").replace(".beta", "").replace(".stable", ""), ">");
+                          if (newVersion) {
+                              document.getElementById("version").innerHTML = currentVersion + "<br><b><u>New Version Available:</u></b> " + testVersion + " <a href='updater.html?old="+ currentVersion +"&schedule=" + updateSchedule +"&new=" + testVersion.replace(".alpha", "").replace(".beta", "").replace("stable", "") +"'><button>Update</button></a>";
+                          } else {
+                              document.getElementById("version").innerHTML = currentVersion + "<br><b><u>Up to date!</u></b>";
+                          }
+                          break;
+                      } else {
+                          index++;
+                      }
+                  }
+          }
       }
-    }
-    xhr.send();
+      xhr.send();
   }
 getVersion();
 </script>
