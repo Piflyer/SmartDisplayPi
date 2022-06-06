@@ -38,7 +38,7 @@ fi
 if [ $1 == "alpha" ]; then
   BRANCH="alpha-branch"
 elif [ $1 == "beta" ]; then
-  BRANCH="alpha-branch"
+  BRANCH="beta-branch"
 else
   BRANCH="master"
 fi
