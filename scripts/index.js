@@ -21,7 +21,7 @@ nextImage = "https://cdn.pixabay.com/photo/2021/11/26/17/26/desert-6826299_960_7
 function updateBackground() {
     document.getElementById("background").style.backgroundImage = "url(" + nextImage + ")";
     setTimeout(() => {
-        fetch("https://www.vestal.ml/smartdisplaypi-backend/background.php")
+        fetch("https://www.vestal.tk/smartdisplaypi-backend/background.php")
             .then(response => response.text())
             .then(data => {
                 nextImage = data;

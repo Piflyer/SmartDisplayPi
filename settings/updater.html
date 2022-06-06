@@ -60,6 +60,10 @@
             entry.running = false
             entry.error = (code !== 0)
             myHistory = myHistory
+            if(entry.error) {
+                document.getElementById("output").innerHTML += "<span class='err'>Error: " + code + "</span>";
+                document.createElement("p").innerText = "There was an error updating. Please check the output for more information and report any issues to the developer. <a href='#' onclick='window.location.reload()'>Retry</a>";
+            }
             document.getElementById("continue").onclick = () => window.location = "about.html";
             document.getElementById("continue").disabled = false;
             document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;

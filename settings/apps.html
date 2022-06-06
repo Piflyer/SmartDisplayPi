@@ -78,8 +78,8 @@
             <option value="https://">https</option>
             <option value="http://">IDK</option>
         </select> :// <input data-kioskboard-specialcharacters="true" id="url" required type="text"><br>
-            <input type="hidden" id="icon" value="/media/website.png">
-            Icon: <button type="button" onclick="openIconForm()"><img id="icon-preview" style="height: 100px; width: 100px" src="../media/website.png"></button><br>
+            <input type="hidden" id="icon" value="internet-web-browser.svg">
+            Icon: <button type="button" onclick="openIconForm()"><img id="icon-preview" style="height: 100px; width: 100px" src="https://www.vestal.tk/smartdisplaypi-backend/kde-icons/icons/internet-web-browser.svg"></button><br>
             <input type="submit" value="Done">
         </form>
 
@@ -99,11 +99,11 @@
 
 </div>
 <div id="settingsMenuBar"><span onclick="window.location = '../settings.html'"><i class="icon icon_bold icon_go-previous"></i> Settings</span></div>
-<br><br>
+<br><br><br>
+<div id="warn" class="info" style="display: none"><i class="icon icon_circular-arrow-shape"></i> Some changes require a <a href="javascript:window.location.reload()">reload</a></div>
 <h1>
     Apps
 </h1>
-
 <ul class="setting-list" id="ul">
 </ul>
 <script src="../scripts/universal.js"></script>
@@ -165,24 +165,23 @@
             }
         });
     }
-    window.onload = () => {
-        refreshApps();
-    }
+refreshApps();
     function deleteApp(name) {
         apps.splice(apps.findIndex(item => item.name === name), 1);
         settings.set("apps", apps);
         refreshApps();
+        document.getElementById("warn").style.display = "block";
     }
-    function createApp(event) {
-        const { DownloaderHelper } = require('node-downloader-helper');
-        const dl = new DownloaderHelper(document.getElementById("icon-preview").src , root + '/media/usr/');
-        dl.on('end', () => console.log('Download Completed'))
-        dl.on('error', (err) => console.error('Download Failed', err));
-        dl.start().catch(err => console.error(err));
+    function createApp() {
         if (apps.findIndex(item => item.name === document.getElementById("name2").value) !== -1) {
             alert("App with that name already exists! Please choose another name or delete the existing app.");
             return;
         }
+        const download = require('download');
+        const url = document.getElementById("icon-preview").src;
+        (async () => {
+            await download(url, root + '/media/usr/');
+        })();
         apps.push(
             {
                 name: document.getElementById("name2").value, href: "/webview.html?url=" + encodeURIComponent(document.getElementById("protocol").value + document.getElementById("url").value), icon: "/media/usr/" + document.getElementById("icon").value
@@ -190,6 +189,7 @@
         settings.set("apps", apps);
         refreshApps();
         document.getElementById("myModal").style.display = "none";
+        document.getElementById("warn").style.display = "block";
         // Just in case
         document.getElementById("iconModal").style.display = "none";
     }

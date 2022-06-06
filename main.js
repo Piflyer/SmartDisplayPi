@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 800,
@@ -10,15 +10,48 @@ const createWindow = () => {
         }
     })
 
-    win.loadFile('index.html')
+    win.loadFile('index.html');
     const Store = require('electron-store');
     const settings = new Store();
-    if (settings.get("devMode", false) == false) {
+    var template;
+    if (settings.get("devMode", false) === false) {
         win.kiosk = true
+        template = [
+            {
+                label: 'Loading...',
+            }
+        ];
     }
     else {
         win.openDevTools();
+        template = [
+            {
+                label: '[DEV MODE]',
+                submenu: [
+                    {
+                        label: 'Toggle Dev Tools',
+                        accelerator: 'F12',
+                        click: function (item, focusedWindow) {
+                            if (focusedWindow) {
+                                focusedWindow.toggleDevTools();
+                            }
+                        }
+                    },
+                    {
+                        label: 'Reload',
+                        accelerator: 'CmdOrCtrl+R',
+                        click: function (item, focusedWindow) {
+                            if (focusedWindow) {
+                                focusedWindow.reload();
+                            }
+                        }
+                    }
+                ]
+            },
+        ];
     }
+    menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
 }
 app.whenReady().then(() => {
     createWindow();

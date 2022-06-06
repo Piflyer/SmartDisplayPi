@@ -10,7 +10,7 @@ function search(query) {
     document.getElementById("icons").innerHTML = "";
     results.forEach(result => {
         let img = document.createElement("img");
-        img.src = "https://www.vestal.ml/smartdisplaypi-backend/kde-icons/icons/" + result.target;
+        img.src = "https://www.vestal.tk/smartdisplaypi-backend/kde-icons/icons/" + result.target;
         document.getElementById("icons").appendChild(img);
         img.onclick = function () {
             document.getElementById("icon").value = result.target;

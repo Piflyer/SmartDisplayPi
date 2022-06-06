@@ -11,7 +11,7 @@
   <p id="[DEVMODE]"></p>
   <script src="../scripts/universal.js"></script>
 <script>
-    const currentVersion = "v0.0.2.alpha";
+    const currentVersion = "v0.0.3.alpha";
     const updateSchedule = "alpha";
   const exec = require('child_process').exec;
 
@@ -23,7 +23,7 @@
       execute('uname -a', (output) => {
           document.getElementById("ubuntu-version").innerHTML = "<b><u>Uname:</u></b> " + output;
       });
-  if(settings.get('devMode') === true) {
+  if(settings.get('devMode', false) === true) {
     document.getElementById("[DEVMODE]").innerHTML = "<b><u>[DEV MODE]:</u></b> Enabled";
   } else {
     document.getElementById("[DEVMODE]").innerHTML = "<b><u>[DEV MODE]:</u></b> Disabled";
@@ -33,10 +33,11 @@
       xhr.open("GET", "https://api.github.com/repos/Sid220/SmartDisplayPi/releases", true);
       xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {
+              let index = 0;
               while(true) {
                       const compare = require("compare-versions").compare;
-                      let index = 0;
                       const testVersion = JSON.parse(xhr.responseText)[index].name;
+                      console.log(testVersion);
                       if (testVersion.includes(updateSchedule)) {
                           const newVersion = compare(testVersion.replace(".alpha", "").replace(".beta", "").replace(".stable", ""), currentVersion.replace(".alpha", "").replace(".beta", "").replace(".stable", ""), ">");
                           if (newVersion) {
@@ -47,6 +48,11 @@
                           break;
                       } else {
                           index++;
+                      }
+                      if(index > 1000) {
+                          document.getElementById("version").innerHTML = currentVersion + "<br><b><u>Error:</u></b> Could not get version.";
+                          console.error("Eternal loop detected; Exited.");
+                          break;
                       }
                   }
           }
