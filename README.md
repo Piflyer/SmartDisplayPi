@@ -21,6 +21,7 @@ This is still in development. Google Assistant is currently broken due to the li
 ![Image of Ambient Mode](Images/ambientmode.png)
 ![Image of Settings](Images/settings.png)
 ![Image of Youtube leanback](Images/youtubeleanback.png)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FPiflyer%2FSmartDisplayPi.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FPiflyer%2FSmartDisplayPi?ref=badge_shield)
 ## Required:
 
 * Raspberry Pi 3B or newer (At *least* 1GB of memory)
@@ -56,3 +57,6 @@ In the near future, we would love to see SmartDisplayPi to all be controlled by 
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FPiflyer%2FSmartDisplayPi.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FPiflyer%2FSmartDisplayPi?ref=badge_large)
